@@ -47,7 +47,7 @@ class ImageActivity : AppCompatActivity() {
             }
         }
 
-        binding.buttonGallery.setOnClickListener {
+        binding.btnGallery.setOnClickListener {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                     //permission denied
@@ -71,7 +71,7 @@ class ImageActivity : AppCompatActivity() {
     private fun pickImageFromGallery() {
         val galleryIntent = Intent()
         galleryIntent.type ="image/*"
-        galleryIntent.action = Intent.ACTION_GET_CONTENT
+        galleryIntent.action = Intent.ACTION_PICK
         startActivityForResult(galleryIntent, IMAGE_PICK_CODE)
     }
 
