@@ -9,7 +9,10 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
+import com.skydoves.rainbow.Rainbow
+import com.skydoves.rainbow.contextColor
 import kotlinx.android.synthetic.main.activity_image.*
 
 
@@ -20,8 +23,8 @@ class ImageActivity : AppCompatActivity() {
     companion object {
         const val EXTRA_OPTION = "extra_option"
         private const val REQUEST_CODE = 42
-        private val IMAGE_PICK_CODE = 1000
-        private val PERMISSIONCODE = 1001
+        private const val IMAGE_PICK_CODE = 1000
+        private const val PERMISSIONCODE = 1001
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

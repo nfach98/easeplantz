@@ -52,4 +52,5 @@ dependencies {
     //UI
     implementation "com.otaliastudios:cameraview:2.7.0"
     implementation "com.squareup.picasso:picasso:2.71828"
+    implementation "com.github.skydoves:rainbow:1.0.1"
 }
