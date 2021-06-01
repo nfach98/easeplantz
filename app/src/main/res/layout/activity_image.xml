@@ -16,7 +16,7 @@
         app:cameraMode="picture"
         app:cameraAudio="off"
         app:cameraFacing="back"
-        app:cameraFlash="torch"
+        app:cameraFlash="off"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,7 +32,7 @@
         android:src="@drawable/abc_ic_ab_back_material"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/blue_dark" />
+        app:tint="@color/blue" />
 
     <ImageView
         android:id="@+id/btn_camera"
@@ -50,15 +50,29 @@
         app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
+        android:id="@+id/btn_flash"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="16dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_flash_off_24"
+        android:background="@drawable/bg_circle_white"
+        app:tint="@color/green"
+        app:layout_constraintWidth_percent="0.15"
+        app:layout_constraintDimensionRatio="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_camera"
+        app:layout_constraintBottom_toBottomOf="@id/btn_camera"/>
+
+    <ImageView
         android:id="@+id/btn_gallery"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:padding="16dp"
         android:layout_margin="12dp"
         android:src="@drawable/ic_baseline_add_image_24"
-        android:background="@drawable/bg_circle_green_blue"
-        android:backgroundTint="@color/white"
-        app:tint="@color/green"
+        android:background="@drawable/bg_circle_white"
+        app:tint="@color/blue"
         app:layout_constraintWidth_percent="0.15"
         app:layout_constraintDimensionRatio="1.0"
         app:layout_constraintTop_toTopOf="@id/btn_camera"

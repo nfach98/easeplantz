@@ -3,24 +3,25 @@ package com.easeplantz.easeplantz.ui
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
+import com.otaliastudios.cameraview.controls.Flash
 import com.otaliastudios.cameraview.gesture.Gesture
 import com.otaliastudios.cameraview.gesture.GestureAction
-import java.io.ByteArrayOutputStream
 
 
 class ImageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageBinding
+    private var flashMode = 0
 
     companion object {
         const val EXTRA_OPTION = "extra_option"
@@ -40,6 +41,7 @@ class ImageActivity : AppCompatActivity() {
         binding.camera.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
+                Log.d("gambar", "yo")
                 val intent = Intent(this@ImageActivity, DetectActivity::class.java)
                 intent.putExtra("image", result.data)
                 startActivity(intent)
@@ -47,6 +49,12 @@ class ImageActivity : AppCompatActivity() {
         })
 
         binding.home.setOnClickListener { finish() }
+
+        binding.btnFlash.setOnClickListener {
+            if(flashMode < 2) flashMode++
+            else flashMode = 0
+            setFlash(flashMode)
+        }
 
         binding.btnCamera.setOnClickListener {
             binding.camera.takePicture()
@@ -108,5 +116,22 @@ class ImageActivity : AppCompatActivity() {
             }
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+
+    private fun setFlash(mode: Int){
+        when(mode){
+            0 -> {
+                binding.btnFlash.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_flash_off_24, null))
+                binding.camera.flash = Flash.OFF
+            }
+            1 -> {
+                binding.btnFlash.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_flash_on_24, null))
+                binding.camera.flash = Flash.ON
+            }
+            2 -> {
+                binding.btnFlash.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_flash_auto_24, null))
+                binding.camera.flash = Flash.AUTO
+            }
+        }
     }
 }

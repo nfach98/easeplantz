@@ -27,7 +27,7 @@ class DetectActivity : AppCompatActivity() {
         }
 
         if(uri != null){
-            Picasso.get().load(uri).into(binding.ivImage)
+            Picasso.get().load(uri).fit().centerCrop().into(binding.ivImage)
         }
     }
 }
