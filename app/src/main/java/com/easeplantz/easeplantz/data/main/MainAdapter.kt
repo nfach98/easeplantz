@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.easeplantz.easeplantz.data.MainEntity
-import com.easeplantz.easeplantz.databinding.ItemsMainMenuBinding
+import com.easeplantz.easeplantz.databinding.ItemsPlantBinding
 import com.easeplantz.easeplantz.ui.OptionActivity
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
@@ -19,7 +19,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
-        val itemsMainMenuBinding = ItemsMainMenuBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val itemsMainMenuBinding = ItemsPlantBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return MainViewHolder(itemsMainMenuBinding)
     }
 
@@ -30,10 +30,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
 
     override fun getItemCount(): Int =listMenus.size
 
-    class MainViewHolder(private val binding: ItemsMainMenuBinding) : RecyclerView.ViewHolder(binding.root){
+    class MainViewHolder(private val binding: ItemsPlantBinding) : RecyclerView.ViewHolder(binding.root){
     fun bind(menu: MainEntity) {
         with(binding) {
-            tvItemTitle.text = menu.title
+            tvName.text = menu.title
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, OptionActivity::class.java)
                 intent.putExtra(OptionActivity.EXTRA_OPTION,menu.id)

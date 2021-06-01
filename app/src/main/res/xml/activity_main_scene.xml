@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/delay">
+        <Constraint
+            android:id="@+id/bg_splash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:id="@+id/iv_leaves"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/iv_text_vertical"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/iv_text_vertical"
+            app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+            app:layout_constraintStart_toStartOf="@id/iv_leaves"
+            android:layout_marginTop="20dp" />
+        <Constraint
+            android:id="@+id/iv_text_horizontal"
+            app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+            app:layout_constraintStart_toStartOf="@id/iv_leaves"
+            android:layout_marginTop="20dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/start">
+        <Constraint android:id="@+id/tv_pilih" />
+        <Constraint
+            android:id="@+id/bg_splash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:id="@+id/iv_leaves"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@id/iv_text_vertical"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+        <Constraint
+            android:id="@+id/iv_text_vertical"
+            app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+            app:layout_constraintStart_toStartOf="@id/iv_leaves"
+            android:layout_marginTop="20dp" />
+        <Constraint
+            android:id="@+id/iv_text_horizontal"
+            app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+            app:layout_constraintStart_toStartOf="@id/iv_leaves"
+            android:layout_marginTop="20dp" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint android:id="@id/tv_pilih" />
+        <Constraint
+            android:id="@+id/bg_splash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <Constraint
+            android:id="@+id/iv_leaves"
+            app:layout_constraintWidth_percent="0.2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/iv_text_horizontal"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp" />
+        <Constraint
+            android:id="@+id/iv_text_vertical"
+            app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+            app:layout_constraintStart_toStartOf="@id/iv_leaves"
+            android:layout_marginTop="20dp" />
+        <Constraint
+            android:id="@+id/iv_text_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toEndOf="@id/iv_leaves"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="5"
+            app:layout_constraintWidth_percent="0.6"
+            app:layout_constraintBottom_toTopOf="@id/rv_plants"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="12dp" />
+        <Constraint
+            android:id="@+id/rv_plants"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/start"
+        app:constraintSetStart="@+id/delay"
+        motion:autoTransition="animateToEnd"
+        motion:duration="3000" >
+
+        <KeyFrameSet >
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_horizontal"
+                motion:framePosition="0"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_horizontal"
+                motion:framePosition="100"
+                android:alpha="0.0" />
+        </KeyFrameSet>
+
+    </Transition>
+
+    <Transition
+        app:constraintSetEnd="@id/end"
+        app:constraintSetStart="@+id/start"
+        motion:autoTransition="animateToEnd"
+        motion:duration="1000" >
+
+        <KeyFrameSet >
+            <KeyAttribute
+                motion:motionTarget="@+id/bg_splash"
+                motion:framePosition="0"
+                android:alpha="1.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/bg_splash"
+                motion:framePosition="75"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/bg_splash"
+                motion:framePosition="100"
+                android:alpha="0.0" />
+
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_vertical"
+                motion:framePosition="0"
+                android:alpha="1.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_vertical"
+                motion:framePosition="75"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_vertical"
+                motion:framePosition="100"
+                android:alpha="0.0" />
+
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_horizontal"
+                motion:framePosition="0"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_horizontal"
+                motion:framePosition="75"
+                android:alpha="0.0" />
+            <KeyAttribute
+                motion:motionTarget="@+id/iv_text_horizontal"
+                motion:framePosition="100"
+                android:alpha="1.0" />
+        </KeyFrameSet>
+
+    </Transition>
+</MotionScene>

@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity() {
         mainAdapter.setMenus(menus)
 
         activityMainBinding.apply {
-            rv_menu.layoutManager = LinearLayoutManager(this@MainActivity)
-            rv_menu.setHasFixedSize(true)
-            rv_menu.adapter = mainAdapter
+            rv_plants.layoutManager = LinearLayoutManager(this@MainActivity)
+            rv_plants.setHasFixedSize(true)
+            rv_plants.adapter = mainAdapter
         }
 
 

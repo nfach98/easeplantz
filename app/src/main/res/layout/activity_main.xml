@@ -1,23 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/activity_main_scene">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_menu"
+        android:id="@+id/rv_plants"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="200dp"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:paddingTop="20dp"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/items_main_menu">
+        app:layout_constraintTop_toBottomOf="@id/tv_pilih"
+        tools:listitem="@layout/items_plant"
+        tools:itemCount="3">
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <View
+        android:id="@+id/bg_splash"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:id="@+id/iv_leaves"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/leaves"
+        android:scaleType="fitCenter"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintDimensionRatio="1.0"
+        app:layout_constraintVertical_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/iv_text_vertical"/>
+
+    <ImageView
+        android:id="@+id/iv_text_vertical"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/text_vertical"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@id/iv_leaves"
+        app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+        app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/iv_text_horizontal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/text_horizontal"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@id/iv_leaves"
+        app:layout_constraintTop_toBottomOf="@id/iv_leaves"
+        app:layout_constraintEnd_toEndOf="@id/iv_leaves"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>
