@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
 import com.otaliastudios.cameraview.gesture.Gesture
 import com.otaliastudios.cameraview.gesture.GestureAction
+import java.io.ByteArrayOutputStream
 
 
 class ImageActivity : AppCompatActivity() {
@@ -88,6 +90,8 @@ class ImageActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
         /*if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.extras?.get("data") as Bitmap
             val intent = Intent(this@ImageActivity, DetectActivity::class.java)
@@ -96,13 +100,17 @@ class ImageActivity : AppCompatActivity() {
         }*/
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
-            val takenImage = data?.extras?.get("data") as Bitmap?
+            val takenImage = data?.data
+            val imageStream = takenImage?.let { contentResolver.openInputStream(it) }
+            val bitmap = BitmapFactory.decodeStream(imageStream)
+            val stream = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val byteArray = stream.toByteArray()
+
             val intent = Intent(this@ImageActivity, DetectActivity::class.java)
-            intent.putExtra("image", takenImage)
+            intent.putExtra("image", byteArray)
             startActivity(intent)
         }
-
-        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onRequestPermissionsResult(

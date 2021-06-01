@@ -1,6 +1,5 @@
 package com.easeplantz.easeplantz.ui
 
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -20,14 +19,9 @@ class DetectActivity : AppCompatActivity() {
 
         val image = intent.getByteArrayExtra("image")
 
-        val bmp = image?.let { BitmapFactory.decodeByteArray(image, 0, it.size) }
-        with(binding.ivImage){
-            setImageBitmap(bmp)
+        if(image != null) {
+            val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
+            binding.ivImage.setImageBitmap(bmp)
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-
     }
 }
