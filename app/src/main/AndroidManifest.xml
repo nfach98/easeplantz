@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Easeplantz">
-        <activity android:name=".ResultActivity"></activity>
+        <activity
+            android:name=".ui.ResultActivity"
+            android:theme="@style/Theme.Easeplantz.NoActionBar" />
         <activity
             android:name=".ui.DetectActivity"
             android:theme="@style/Theme.Easeplantz.NoActionBar" />

@@ -1,7 +1,8 @@
-package com.easeplantz.easeplantz
+package com.easeplantz.easeplantz.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.easeplantz.easeplantz.R
 
 class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

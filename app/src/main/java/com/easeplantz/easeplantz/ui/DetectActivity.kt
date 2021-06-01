@@ -1,5 +1,6 @@
 package com.easeplantz.easeplantz.ui
 
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -16,8 +17,6 @@ class DetectActivity : AppCompatActivity() {
         binding = ActivityDetectBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.home.setOnClickListener { finish() }
-
         val image = intent.getByteArrayExtra("image")
         val uri = intent.data
 
@@ -28,6 +27,12 @@ class DetectActivity : AppCompatActivity() {
 
         if(uri != null){
             Picasso.get().load(uri).fit().centerCrop().into(binding.ivImage)
+        }
+
+        binding.home.setOnClickListener { finish() }
+
+        binding.btnDetect.setOnClickListener {
+            startActivity(Intent(this@DetectActivity, ResultActivity::class.java))
         }
     }
 }
