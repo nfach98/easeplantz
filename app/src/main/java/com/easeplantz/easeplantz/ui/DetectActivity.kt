@@ -1,9 +1,11 @@
 package com.easeplantz.easeplantz.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import com.easeplantz.easeplantz.R
+import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.databinding.ActivityDetectBinding
+
 
 class DetectActivity : AppCompatActivity() {
 
@@ -15,5 +17,17 @@ class DetectActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.home.setOnClickListener { finish() }
+
+        val image = intent.getByteArrayExtra("image")
+
+        val bmp = image?.let { BitmapFactory.decodeByteArray(image, 0, it.size) }
+        with(binding.ivImage){
+            setImageBitmap(bmp)
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
     }
 }
