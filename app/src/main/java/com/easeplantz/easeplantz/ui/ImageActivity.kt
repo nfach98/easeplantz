@@ -10,7 +10,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import com.easeplantz.easeplantz.R
-import kotlinx.android.synthetic.main.activity_option.*
+import kotlinx.android.synthetic.main.activity_image.*
 
 class ImageActivity : AppCompatActivity() {
 
