@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
+import com.otaliastudios.cameraview.gesture.Gesture
+import com.otaliastudios.cameraview.gesture.GestureAction
 import com.skydoves.rainbow.Rainbow
 import com.skydoves.rainbow.contextColor
 import kotlinx.android.synthetic.main.activity_image.*
@@ -33,10 +35,12 @@ class ImageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.camera.setLifecycleOwner(this)
+        binding.camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM)
+        binding.camera.mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
 
         binding.home.setOnClickListener { finish() }
 
-        binding.buttonCamera.setOnClickListener {
+        /*binding.buttonCamera.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(cameraIntent,REQUEST_CODE)
 
@@ -45,7 +49,7 @@ class ImageActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this,"Unable to open camera", Toast.LENGTH_SHORT).show()
             }
-        }
+        }*/
 
         binding.btnGallery.setOnClickListener {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

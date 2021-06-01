@@ -33,19 +33,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/blue_dark" />
 
-    <Button
-        android:id="@+id/button_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Take picture from camera"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.612" />
-
-
     <ImageView
         android:id="@+id/btn_camera"
         android:layout_width="0dp"
@@ -65,7 +52,7 @@
         android:id="@+id/btn_gallery"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="12dp"
+        android:padding="16dp"
         android:layout_margin="12dp"
         android:src="@drawable/ic_baseline_add_image_24"
         android:background="@drawable/bg_circle_green_blue"
