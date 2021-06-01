@@ -13,6 +13,7 @@
         android:layout_height="0dp"
         android:background="@android:color/transparent"
         android:keepScreenOn="true"
+        app:cameraMode="picture"
         app:cameraAudio="off"
         app:cameraFacing="back"
         app:cameraFlash="torch"

@@ -10,10 +10,13 @@ import com.easeplantz.easeplantz.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(activityMainBinding.root)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory() )[MainViewModel::class.java]
         val menus = viewModel.getMenus()
@@ -21,7 +24,7 @@ class MainActivity : AppCompatActivity() {
         val mainAdapter = MainAdapter()
         mainAdapter.setMenus(menus)
 
-        activityMainBinding.apply {
+        binding.apply {
             rv_plants.layoutManager = LinearLayoutManager(this@MainActivity)
             rv_plants.setHasFixedSize(true)
             rv_plants.adapter = mainAdapter

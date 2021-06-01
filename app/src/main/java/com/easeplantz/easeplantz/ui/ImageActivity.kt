@@ -7,10 +7,13 @@ import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
+import com.otaliastudios.cameraview.CameraListener
+import com.otaliastudios.cameraview.PictureResult
 import com.otaliastudios.cameraview.gesture.Gesture
 import com.otaliastudios.cameraview.gesture.GestureAction
 import com.skydoves.rainbow.Rainbow
@@ -37,6 +40,14 @@ class ImageActivity : AppCompatActivity() {
         binding.camera.setLifecycleOwner(this)
         binding.camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM)
         binding.camera.mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
+        binding.camera.addCameraListener(object : CameraListener() {
+
+            override fun onPictureTaken(result: PictureResult) {
+                super.onPictureTaken(result)
+                Log.d("gambar", result.toString())
+            }
+
+        })
 
         binding.home.setOnClickListener { finish() }
 
@@ -50,6 +61,10 @@ class ImageActivity : AppCompatActivity() {
                 Toast.makeText(this,"Unable to open camera", Toast.LENGTH_SHORT).show()
             }
         }*/
+
+        binding.btnCamera.setOnClickListener {
+            binding.camera.takePicture()
+        }
 
         binding.btnGallery.setOnClickListener {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
