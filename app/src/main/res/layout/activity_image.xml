@@ -21,6 +21,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <ImageView
+        android:id="@id/home"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_circle_white"
+        android:padding="8dp"
+        android:src="@drawable/abc_ic_ab_back_material"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue_dark" />
+
     <Button
         android:id="@+id/button_camera"
         android:layout_width="wrap_content"
@@ -45,5 +57,35 @@
         app:layout_constraintTop_toBottomOf="@+id/button_camera"
         app:layout_constraintVertical_bias="0.11" />
 
+    <ImageView
+        android:id="@+id/btn_camera"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_camera_24"
+        android:background="@drawable/bg_circle_green_blue"
+        app:tint="@color/white"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintDimensionRatio="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/btn_gallery"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:layout_margin="12dp"
+        android:src="@drawable/ic_baseline_add_image_24"
+        android:background="@drawable/bg_circle_green_blue"
+        android:backgroundTint="@color/white"
+        app:tint="@color/green"
+        app:layout_constraintWidth_percent="0.15"
+        app:layout_constraintDimensionRatio="1.0"
+        app:layout_constraintTop_toTopOf="@id/btn_camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/btn_camera"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

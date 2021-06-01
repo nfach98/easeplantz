@@ -3,10 +3,12 @@ package com.easeplantz.easeplantz.data.main
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.easeplantz.easeplantz.data.MainEntity
 import com.easeplantz.easeplantz.databinding.ItemsPlantBinding
 import com.easeplantz.easeplantz.ui.ImageActivity
+import com.squareup.picasso.Picasso
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     private var listMenus = ArrayList<MainEntity>()
@@ -28,11 +30,12 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         holder.bind(menus)
     }
 
-    override fun getItemCount(): Int =listMenus.size
+    override fun getItemCount(): Int = listMenus.size
 
     class MainViewHolder(private val binding: ItemsPlantBinding) : RecyclerView.ViewHolder(binding.root){
     fun bind(menu: MainEntity) {
         with(binding) {
+            Picasso.get().load(menu.image).into(binding.ivPlant)
             tvName.text = menu.title
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, ImageActivity::class.java)

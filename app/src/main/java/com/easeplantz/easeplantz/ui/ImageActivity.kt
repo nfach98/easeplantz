@@ -5,13 +5,13 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
-import com.easeplantz.easeplantz.R
+import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
 import kotlinx.android.synthetic.main.activity_image.*
+
 
 class ImageActivity : AppCompatActivity() {
 
@@ -30,6 +30,8 @@ class ImageActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.camera.setLifecycleOwner(this)
+
+        binding.home.setOnClickListener { finish() }
 
         binding.buttonCamera.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
@@ -64,8 +66,9 @@ class ImageActivity : AppCompatActivity() {
     }
 
     private fun pickImageFromGallery() {
-        val galleryIntent = Intent(Intent.ACTION_PICK)
-        intent.type ="image/*"
+        val galleryIntent = Intent()
+        galleryIntent.type ="image/*"
+        galleryIntent.action = Intent.ACTION_GET_CONTENT
         startActivityForResult(galleryIntent, IMAGE_PICK_CODE)
     }
 
@@ -91,7 +94,7 @@ class ImageActivity : AppCompatActivity() {
     ) {
         when (requestCode) {
             PERMISSIONCODE -> {
-                if (grantResults.size >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     pickImageFromGallery()
                 }
                 else{
