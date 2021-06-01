@@ -93,15 +93,6 @@ class ImageActivity : AppCompatActivity() {
             val intent = Intent(this@ImageActivity, DetectActivity::class.java)
             intent.data = takenImage
             startActivity(intent)
-            /*val imageStream = takenImage?.let { contentResolver.openInputStream(it) }
-            if(imageStream != null){
-                val bitmap = BitmapFactory.decodeStream(imageStream)
-                val stream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-                val byteArray = stream.toByteArray()
-
-
-            }*/
         }
     }
 
