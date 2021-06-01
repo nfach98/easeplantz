@@ -48,17 +48,6 @@ class ImageActivity : AppCompatActivity() {
 
         binding.home.setOnClickListener { finish() }
 
-        /*binding.buttonCamera.setOnClickListener {
-            val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-            startActivityForResult(cameraIntent,REQUEST_CODE)
-
-            if(cameraIntent.resolveActivity(this.packageManager) != null) {
-                startActivityForResult(cameraIntent, REQUEST_CODE)
-            } else {
-                Toast.makeText(this,"Unable to open camera", Toast.LENGTH_SHORT).show()
-            }
-        }*/
-
         binding.btnCamera.setOnClickListener {
             binding.camera.takePicture()
         }
@@ -101,23 +90,22 @@ class ImageActivity : AppCompatActivity() {
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.data
-            val imageStream = takenImage?.let { contentResolver.openInputStream(it) }
-            val bitmap = BitmapFactory.decodeStream(imageStream)
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val byteArray = stream.toByteArray()
-
             val intent = Intent(this@ImageActivity, DetectActivity::class.java)
-            intent.putExtra("image", byteArray)
+            intent.data = takenImage
             startActivity(intent)
+            /*val imageStream = takenImage?.let { contentResolver.openInputStream(it) }
+            if(imageStream != null){
+                val bitmap = BitmapFactory.decodeStream(imageStream)
+                val stream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+                val byteArray = stream.toByteArray()
+
+
+            }*/
         }
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
             PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){

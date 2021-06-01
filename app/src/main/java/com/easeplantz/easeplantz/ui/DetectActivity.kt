@@ -4,6 +4,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.databinding.ActivityDetectBinding
+import com.squareup.picasso.Picasso
 
 
 class DetectActivity : AppCompatActivity() {
@@ -18,10 +19,15 @@ class DetectActivity : AppCompatActivity() {
         binding.home.setOnClickListener { finish() }
 
         val image = intent.getByteArrayExtra("image")
+        val uri = intent.data
 
         if(image != null) {
             val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
             binding.ivImage.setImageBitmap(bmp)
+        }
+
+        if(uri != null){
+            Picasso.get().load(uri).into(binding.ivImage)
         }
     }
 }
