@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.easeplantz.easeplantz.data.main.MainAdapter
 import com.easeplantz.easeplantz.data.main.MainViewModel
 import com.easeplantz.easeplantz.databinding.ActivityMainBinding
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,9 +24,9 @@ class MainActivity : AppCompatActivity() {
         mainAdapter.setMenus(menus)
 
         binding.apply {
-            rv_plants.layoutManager = LinearLayoutManager(this@MainActivity)
-            rv_plants.setHasFixedSize(true)
-            rv_plants.adapter = mainAdapter
+            rvPlants.layoutManager = LinearLayoutManager(this@MainActivity)
+            rvPlants.setHasFixedSize(true)
+            rvPlants.adapter = mainAdapter
         }
 
 
