@@ -33,6 +33,7 @@ class DetectActivity : AppCompatActivity() {
 
         binding.btnDetect.setOnClickListener {
             startActivity(Intent(this@DetectActivity, ResultActivity::class.java))
+            finish()
         }
     }
 }
