@@ -28,8 +28,5 @@ class MainActivity : AppCompatActivity() {
             rvPlants.setHasFixedSize(true)
             rvPlants.adapter = mainAdapter
         }
-
-
-
     }
 }

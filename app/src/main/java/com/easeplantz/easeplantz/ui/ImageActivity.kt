@@ -24,7 +24,7 @@ class ImageActivity : AppCompatActivity() {
         const val EXTRA_OPTION = "extra_option"
         private const val REQUEST_CODE = 42
         private const val IMAGE_PICK_CODE = 1000
-        private const val PERMISSIONCODE = 1001
+        private const val PERMISSION_CODE = 1001
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -66,7 +66,7 @@ class ImageActivity : AppCompatActivity() {
                 if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                     //permission denied
                     val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    requestPermissions(permissions, PERMISSIONCODE)
+                    requestPermissions(permissions, PERMISSION_CODE)
                 }
                 else {
                     //permission already granted
@@ -88,15 +88,18 @@ class ImageActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+        /*if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.extras?.get("data") as Bitmap
-            //imageVIew.setImageBitmap(takenImage)
-
-        }
+            val intent = Intent(this@ImageActivity, DetectActivity::class.java)
+            intent.putExtra("image", takenImage)
+            startActivity(intent)
+        }*/
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
-            //imageView.setImageURI(data?.data)
-
+            val takenImage = data?.extras?.get("data") as Bitmap?
+            val intent = Intent(this@ImageActivity, DetectActivity::class.java)
+            intent.putExtra("image", takenImage)
+            startActivity(intent)
         }
 
         super.onActivityResult(requestCode, resultCode, data)
@@ -108,7 +111,7 @@ class ImageActivity : AppCompatActivity() {
         grantResults: IntArray
     ) {
         when (requestCode) {
-            PERMISSIONCODE -> {
+            PERMISSION_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     pickImageFromGallery()
                 }
