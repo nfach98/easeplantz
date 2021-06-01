@@ -10,9 +10,12 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.widget.Toast
 import com.easeplantz.easeplantz.R
+import com.easeplantz.easeplantz.databinding.ActivityImageBinding
 import kotlinx.android.synthetic.main.activity_image.*
 
 class ImageActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityImageBinding
 
     companion object {
         const val EXTRA_OPTION = "extra_option"
@@ -23,9 +26,12 @@ class ImageActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_image)
+        binding = ActivityImageBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        button_camera.setOnClickListener {
+        binding.camera.setLifecycleOwner(this)
+
+        binding.buttonCamera.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
             startActivityForResult(cameraIntent,REQUEST_CODE)
 
@@ -36,7 +42,7 @@ class ImageActivity : AppCompatActivity() {
             }
         }
 
-        button_gallery.setOnClickListener {
+        binding.buttonGallery.setOnClickListener {
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
                     //permission denied
