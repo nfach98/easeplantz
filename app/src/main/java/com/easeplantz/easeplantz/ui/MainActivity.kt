@@ -1,4 +1,4 @@
-package com.easeplantz.easeplantz
+package com.easeplantz.easeplantz.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

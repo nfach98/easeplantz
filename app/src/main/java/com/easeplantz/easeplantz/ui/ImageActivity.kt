@@ -11,9 +11,8 @@ import android.provider.MediaStore
 import android.widget.Toast
 import com.easeplantz.easeplantz.R
 import kotlinx.android.synthetic.main.activity_option.*
-import java.util.jar.Manifest
 
-class OptionActivity : AppCompatActivity() {
+class ImageActivity : AppCompatActivity() {
 
     companion object {
         const val EXTRA_OPTION = "extra_option"
@@ -24,7 +23,7 @@ class OptionActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_option)
+        setContentView(R.layout.activity_image)
 
         button_camera.setOnClickListener {
             val cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)

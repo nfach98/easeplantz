@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.easeplantz.easeplantz.data.MainEntity
 import com.easeplantz.easeplantz.databinding.ItemsPlantBinding
-import com.easeplantz.easeplantz.ui.OptionActivity
+import com.easeplantz.easeplantz.ui.ImageActivity
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     private var listMenus = ArrayList<MainEntity>()
@@ -35,8 +35,8 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
         with(binding) {
             tvName.text = menu.title
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, OptionActivity::class.java)
-                intent.putExtra(OptionActivity.EXTRA_OPTION,menu.id)
+                val intent = Intent(itemView.context, ImageActivity::class.java)
+                intent.putExtra(ImageActivity.EXTRA_OPTION,menu.id)
                 itemView.context.startActivity(intent)
             }
 
