@@ -8,6 +8,16 @@
     tools:context=".ui.DetectActivity">
 
     <ImageView
+        android:id="@+id/iv_image"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginBottom="12dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_detect"
+        tools:src="@drawable/image_corn"/>
+
+    <ImageView
         android:id="@id/home"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,16 +28,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/blue_dark" />
-
-    <ImageView
-        android:id="@+id/iv_image"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginBottom="12dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_detect"
-        tools:src="@drawable/image_corn"/>
 
     <ImageView
         android:id="@+id/btn_detect"
