@@ -11,7 +11,7 @@ data class PredictionResponse(
     var filename: String? = null,
 
     @SerializedName("model")
-    var model: String? = null,
+    var model: String,
 
     @SerializedName("url")
     var url: String? = null,

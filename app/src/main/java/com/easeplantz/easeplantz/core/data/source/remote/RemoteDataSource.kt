@@ -10,13 +10,14 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import okhttp3.MultipartBody
 
 class RemoteDataSource constructor(private val apiServices: ApiServices) {
     @SuppressLint("CheckResult")
-    fun getPrediction(model: String): Flowable<ApiResponse<PredictionResponse>> {
+    fun getPrediction(model: String, image: MultipartBody.Part): Flowable<ApiResponse<PredictionResponse>> {
         val resultData = PublishSubject.create<ApiResponse<PredictionResponse>>()
 
-        val client = apiServices.getPrediction(model)
+        val client = apiServices.getPrediction(model, image)
 
         client
             .subscribeOn(Schedulers.computation())

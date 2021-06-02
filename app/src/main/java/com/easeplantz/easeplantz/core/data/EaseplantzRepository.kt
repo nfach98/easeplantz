@@ -11,6 +11,7 @@ import com.easeplantz.easeplantz.core.utils.DataMapper
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import okhttp3.MultipartBody
 
 class EaseplantzRepository constructor(
     private val remoteDataSource: RemoteDataSource,
@@ -18,7 +19,7 @@ class EaseplantzRepository constructor(
     private val appExecutors: AppExecutors
     ): IEaseplantzRepository {
 
-    override fun getPrediction(model: String): Flowable<Resource<Prediction>>  =
+    override fun getPrediction(model: String, image: MultipartBody.Part): Flowable<Resource<Prediction>>  =
         object : NetworkBoundResource<Prediction, PredictionResponse>(appExecutors) {
             override fun loadFromDB(): Flowable<Prediction> {
                 return localDataSource.getPrediction(model).map {
@@ -29,7 +30,7 @@ class EaseplantzRepository constructor(
             override fun shouldFetch(data: Prediction?): Boolean = data == null
 
             override fun createCall(): Flowable<ApiResponse<PredictionResponse>> =
-                remoteDataSource.getPrediction(model)
+                remoteDataSource.getPrediction(model, image)
 
             override fun saveCallResult(data: PredictionResponse) {
                 val prediction = DataMapper.mapPredictionResponsesToEntities(data)

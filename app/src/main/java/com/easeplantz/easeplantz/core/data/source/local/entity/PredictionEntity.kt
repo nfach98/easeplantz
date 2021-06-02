@@ -1,6 +1,7 @@
 package com.easeplantz.easeplantz.core.data.source.local.entity
 
 
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -14,8 +15,9 @@ data class PredictionEntity(
     var filename: String? = null,
 
     @PrimaryKey
+    @NonNull
     @ColumnInfo(name = "model")
-    var model: String? = null,
+    var model: String,
 
     @ColumnInfo(name = "url")
     var url: String? = null,
