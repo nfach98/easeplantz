@@ -8,22 +8,13 @@
     tools:context=".ui.ResultActivity"
     app:layoutDescription="@xml/activity_result_scene">
 
-    <androidx.constraintlayout.utils.widget.ImageFilterView
-        android:id="@+id/iv_background"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="@id/tv_info"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/image_potato" />
-
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="@drawable/bg_gradient_green_blue"
+        android:background="@drawable/bg_gradient_green_blue_rounded"
         app:layout_constraintBottom_toBottomOf="@id/tv_info"
-        app:layout_constraintTop_toTopOf="@id/iv_background" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@id/home"
@@ -49,15 +40,15 @@
         app:tint="@color/white" />
 
     <ImageView
-        android:id="@+id/card_poster"
+        android:id="@+id/iv_detect"
         android:transitionName="poster"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="8dp"
         android:scaleType="centerCrop"
         app:layout_constraintDimensionRatio="0.7"
-        app:layout_constraintEnd_toEndOf="@id/iv_background"
-        app:layout_constraintStart_toStartOf="@id/iv_background"
+        app:layout_constraintEnd_toEndOf="@id/view"
+        app:layout_constraintStart_toStartOf="@id/view"
         app:layout_constraintTop_toBottomOf="@id/home"
         app:layout_constraintWidth_percent="0.4"
         tools:src="@drawable/image_potato"/>
@@ -74,7 +65,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_poster"
+        app:layout_constraintTop_toBottomOf="@id/iv_detect"
         tools:text="@string/app_name" />
 
     <TextView
@@ -91,7 +82,7 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card_poster"
+        app:layout_constraintTop_toBottomOf="@id/iv_detect"
         tools:text="@string/app_name" />
 
     <TextView

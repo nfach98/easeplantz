@@ -9,15 +9,15 @@
         motion:duration="1000">
         <KeyFrameSet>
             <KeyAttribute
-                motion:motionTarget="@id/card_poster"
+                motion:motionTarget="@id/iv_detect"
                 motion:framePosition="0"
                 android:alpha="1" />
             <KeyAttribute
-                motion:motionTarget="@id/card_poster"
+                motion:motionTarget="@id/iv_detect"
                 motion:framePosition="30"
                 android:alpha="0" />
             <KeyAttribute
-                motion:motionTarget="@id/card_poster"
+                motion:motionTarget="@id/iv_detect"
                 motion:framePosition="100"
                 android:alpha="0" />
 
@@ -83,16 +83,10 @@
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/iv_background"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/scroll_view" />
-        <Constraint
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            motion:layout_constraintTop_toTopOf="@id/iv_background"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toTopOf="@id/scroll_view" />
         <Constraint
             android:id="@id/home"
@@ -103,16 +97,16 @@
             motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
         <Constraint
-            android:id="@+id/card_poster"
+            android:id="@+id/iv_detect"
             android:elevation="0dp"
             motion:layout_constraintWidth_percent="0.4"
-            motion:layout_constraintEnd_toEndOf="@id/iv_background"
+            motion:layout_constraintEnd_toEndOf="@id/view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
             motion:layout_constraintTop_toBottomOf="@id/home"
             motion:layout_constraintDimensionRatio="0.7"
-            motion:layout_constraintStart_toStartOf="@id/iv_background" />
+            motion:layout_constraintStart_toStartOf="@id/view" />
         <Constraint
             android:id="@+id/tv_name"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -121,7 +115,7 @@
             android:layout_marginStart="8dp"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp"
-            motion:layout_constraintTop_toBottomOf="@id/card_poster" />
+            motion:layout_constraintTop_toBottomOf="@id/iv_detect" />
         <Constraint
             android:id="@+id/scroll_view"
             motion:layout_constraintEnd_toEndOf="parent"
@@ -156,18 +150,12 @@
             android:layout_marginStart="8dp"
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="12dp"
-            motion:layout_constraintTop_toBottomOf="@id/card_poster"
+            motion:layout_constraintTop_toBottomOf="@id/iv_detect"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="8dp" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
-        <Constraint
-            android:id="@+id/iv_background"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            motion:layout_constraintTop_toTopOf="parent"
-            motion:layout_constraintBottom_toTopOf="@id/scroll_view" />
         <Constraint
             android:id="@+id/tv_name"
             android:layout_width="0dp"
@@ -192,7 +180,7 @@
             android:id="@+id/view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            motion:layout_constraintTop_toTopOf="@id/iv_background"
+            motion:layout_constraintTop_toTopOf="parent"
             motion:layout_constraintBottom_toTopOf="@id/scroll_view" />
         <Constraint
             android:id="@+id/scroll_view"
@@ -204,14 +192,14 @@
             motion:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="8dp" />
         <Constraint
-            android:id="@+id/card_poster"
+            android:id="@+id/iv_detect"
             android:elevation="0dp"
             motion:layout_constraintWidth_percent="0.4"
-            motion:layout_constraintEnd_toEndOf="@id/iv_background"
+            motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
             motion:layout_constraintDimensionRatio="0.7"
-            motion:layout_constraintStart_toStartOf="@id/iv_background"
+            motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
             android:id="@+id/tv_info"
