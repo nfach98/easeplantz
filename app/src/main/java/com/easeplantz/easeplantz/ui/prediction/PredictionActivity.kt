@@ -1,15 +1,18 @@
-package com.easeplantz.easeplantz.ui
+package com.easeplantz.easeplantz.ui.prediction
 
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.databinding.ActivityDetectBinding
+import com.easeplantz.easeplantz.ui.result.ResultActivity
 import com.squareup.picasso.Picasso
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
-class DetectActivity : AppCompatActivity() {
+class PredictionActivity : AppCompatActivity() {
 
+    private val viewModel: PredictionViewModel by viewModel()
     private lateinit var binding: ActivityDetectBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +35,7 @@ class DetectActivity : AppCompatActivity() {
         binding.home.setOnClickListener { finish() }
 
         binding.btnDetect.setOnClickListener {
-            startActivity(Intent(this@DetectActivity, ResultActivity::class.java))
+            startActivity(Intent(this@PredictionActivity, ResultActivity::class.java))
             finish()
         }
     }

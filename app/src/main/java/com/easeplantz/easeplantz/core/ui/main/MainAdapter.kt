@@ -4,9 +4,9 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.easeplantz.easeplantz.core.data.MainEntity
+import com.easeplantz.easeplantz.core.data.source.local.entity.MainEntity
 import com.easeplantz.easeplantz.databinding.ItemsPlantBinding
-import com.easeplantz.easeplantz.ui.ImageActivity
+import com.easeplantz.easeplantz.ui.image.ImageActivity
 import com.squareup.picasso.Picasso
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {

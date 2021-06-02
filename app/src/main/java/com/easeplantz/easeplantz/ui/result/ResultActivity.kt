@@ -1,4 +1,4 @@
-package com.easeplantz.easeplantz.ui
+package com.easeplantz.easeplantz.ui.result
 
 import android.os.Bundle
 import android.view.View
