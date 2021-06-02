@@ -2,4 +2,5 @@
     <string name="app_name">easeplantz</string>
     <string name="title">nama item</string>
     <string name="choose_plants">Pilih tumbuhan</string>
+    <string name="message_wait">Tunggu sebentar … \nKami sedang memproses data Anda</string>
 </resources>
