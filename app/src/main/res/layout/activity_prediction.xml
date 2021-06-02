@@ -51,12 +51,11 @@
         android:visibility="gone"
         android:background="@color/white">
 
-        <fr.castorflex.android.circularprogressbar.CircularProgressBar
+        <ProgressBar
             android:id="@+id/progress_bar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cpb_color="@color/green"
-            app:cpb_stroke_width="4dp"
+            android:indeterminateTint="@color/green"
             app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
