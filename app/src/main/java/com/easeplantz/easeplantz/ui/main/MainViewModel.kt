@@ -1,4 +1,4 @@
-package com.easeplantz.easeplantz.core.ui.main
+package com.easeplantz.easeplantz.ui.main
 
 import androidx.lifecycle.ViewModel
 import com.easeplantz.easeplantz.core.utils.Data

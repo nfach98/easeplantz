@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
+import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.prediction.PredictionActivity
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
@@ -22,6 +23,7 @@ import com.otaliastudios.cameraview.gesture.GestureAction
 class ImageActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityImageBinding
+    private lateinit var model: String
     private var flashMode = 0
 
     companion object {
@@ -36,15 +38,17 @@ class ImageActivity : AppCompatActivity() {
         binding = ActivityImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()
+
         binding.camera.setLifecycleOwner(this)
         binding.camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM)
         binding.camera.mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
         binding.camera.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
-                Log.d("gambar", "yo")
                 val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
                 intent.putExtra("image", result.data)
+                intent.putExtra(MainActivity.EXTRA_MODEL, model)
                 startActivity(intent)
             }
         })
@@ -101,6 +105,7 @@ class ImageActivity : AppCompatActivity() {
             val takenImage = data?.data
             val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
             intent.data = takenImage
+            intent.putExtra(MainActivity.EXTRA_MODEL, model)
             startActivity(intent)
         }
     }

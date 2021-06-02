@@ -6,5 +6,5 @@ import io.reactivex.Flowable
 import okhttp3.MultipartBody
 
 interface IEaseplantzRepository {
-    fun getPrediction(model: String, image: MultipartBody.Part) : Flowable<Resource<Prediction>>
+    fun getPrediction(model: String, image: MultipartBody.Part, shouldFetch: Boolean) : Flowable<Resource<Prediction>>
 }

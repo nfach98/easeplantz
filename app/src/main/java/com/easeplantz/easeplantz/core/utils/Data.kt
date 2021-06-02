@@ -11,6 +11,7 @@ object Data {
             MainEntity(
                 id = "1",
                 title = "Corn Diseases",
+                model = "corn",
                 image = R.drawable.image_corn
             )
         )
@@ -19,6 +20,7 @@ object Data {
             MainEntity(
                 id = "2",
                 title = "Tomato Diseases",
+                model = "tomato",
                 image = R.drawable.image_tomato
             )
         )
@@ -27,6 +29,7 @@ object Data {
             MainEntity(
                 id = "3",
                 title = "Potato Diseases",
+                model = "potato",
                 image = R.drawable.image_potato
             )
         )
