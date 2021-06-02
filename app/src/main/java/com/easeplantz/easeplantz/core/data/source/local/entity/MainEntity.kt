@@ -1,4 +1,4 @@
-package com.easeplantz.easeplantz.data
+package com.easeplantz.easeplantz.core.data.source.local.entity
 
 data class MainEntity(
     var id: String,

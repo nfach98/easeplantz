@@ -1,4 +1,4 @@
-package com.easeplantz.easeplantz.ui
+package com.easeplantz.easeplantz.ui.image
 
 import android.app.Activity
 import android.content.Intent
@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
+import com.easeplantz.easeplantz.ui.prediction.PredictionActivity
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
 import com.otaliastudios.cameraview.controls.Flash
@@ -42,7 +43,7 @@ class ImageActivity : AppCompatActivity() {
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
                 Log.d("gambar", "yo")
-                val intent = Intent(this@ImageActivity, DetectActivity::class.java)
+                val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
                 intent.putExtra("image", result.data)
                 startActivity(intent)
             }
@@ -98,7 +99,7 @@ class ImageActivity : AppCompatActivity() {
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.data
-            val intent = Intent(this@ImageActivity, DetectActivity::class.java)
+            val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
             intent.data = takenImage
             startActivity(intent)
         }

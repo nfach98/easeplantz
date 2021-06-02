@@ -1,11 +1,11 @@
-package com.easeplantz.easeplantz.ui
+package com.easeplantz.easeplantz.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.easeplantz.easeplantz.data.main.MainAdapter
-import com.easeplantz.easeplantz.data.main.MainViewModel
+import com.easeplantz.easeplantz.core.ui.main.MainAdapter
+import com.easeplantz.easeplantz.core.ui.main.MainViewModel
 import com.easeplantz.easeplantz.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

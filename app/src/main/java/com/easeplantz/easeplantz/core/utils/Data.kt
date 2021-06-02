@@ -1,6 +1,7 @@
-package com.easeplantz.easeplantz.data
+package com.easeplantz.easeplantz.core.utils
 
 import com.easeplantz.easeplantz.R
+import com.easeplantz.easeplantz.core.data.source.local.entity.MainEntity
 
 object Data {
     fun mainMenuData(): ArrayList<MainEntity> {
