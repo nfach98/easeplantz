@@ -1,11 +1,10 @@
-package com.easeplantz.easeplantz.data.main
+package com.easeplantz.easeplantz.core.ui.main
 
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.easeplantz.easeplantz.data.MainEntity
+import com.easeplantz.easeplantz.core.data.MainEntity
 import com.easeplantz.easeplantz.databinding.ItemsPlantBinding
 import com.easeplantz.easeplantz.ui.ImageActivity
 import com.squareup.picasso.Picasso
