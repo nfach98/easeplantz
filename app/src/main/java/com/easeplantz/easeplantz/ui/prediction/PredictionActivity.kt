@@ -61,8 +61,6 @@ class PredictionActivity : AppCompatActivity() {
 
             val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
-            Log.d("aaa", body.toString())
-            Log.d("aaa", part.toString())
 
             viewModel.getPrediction(model, part, true).observe(this, { prediction ->
                 if(prediction != null){
