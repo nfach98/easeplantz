@@ -9,31 +9,41 @@
     android:layout_marginBottom="20dp"
     android:background="@drawable/bg_items_plant"
     android:elevation="8dp"
+    android:clipChildren="true"
     android:orientation="vertical">
 
     <ImageView
         android:id="@+id/iv_plant"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintDimensionRatio="1.0"
+        android:layout_height="160dp"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:src="@drawable/image_corn"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_gradient_gray_transparent"
+        android:alpha="0.7"
+        app:layout_constraintStart_toStartOf="@id/iv_plant"
+        app:layout_constraintTop_toTopOf="@id/iv_plant"
+        app:layout_constraintEnd_toEndOf="@id/iv_plant"
+        app:layout_constraintBottom_toBottomOf="@id/iv_plant"/>
 
     <TextView
         android:id="@+id/tv_name"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
+        android:layout_marginBottom="12dp"
         android:textSize="20sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@id/iv_plant"
-        app:layout_constraintTop_toTopOf="@id/iv_plant"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/iv_plant"
+        app:layout_constraintEnd_toEndOf="@id/iv_plant"
+        app:layout_constraintBottom_toBottomOf="@id/iv_plant"
         tools:text="Tanaman"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

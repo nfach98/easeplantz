@@ -16,6 +16,9 @@ data class PredictionResponse(
     @SerializedName("url")
     var url: String? = null,
 
+    @SerializedName("disease")
+    var disease: String? = null,
+
     @SerializedName("prediction")
     var prediction: String? = null
 )
