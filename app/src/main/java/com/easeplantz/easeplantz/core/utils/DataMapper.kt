@@ -11,6 +11,7 @@ object DataMapper {
             filename = input.filename,
             model = input.model,
             url = input.url,
+            disease = input.disease,
             prediction = input.prediction,
         )
 
@@ -20,6 +21,7 @@ object DataMapper {
             filename = input.filename,
             model = input.model,
             url = input.url,
+            disease = input.disease,
             prediction = input.prediction,
         )
 }

@@ -22,6 +22,9 @@ data class PredictionEntity(
     @ColumnInfo(name = "url")
     var url: String? = null,
 
+    @ColumnInfo(name = "disease")
+    var disease: String? = null,
+
     @ColumnInfo(name = "prediction")
     var prediction: String? = null
 )
