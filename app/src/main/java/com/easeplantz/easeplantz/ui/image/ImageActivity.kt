@@ -46,10 +46,16 @@ class ImageActivity : AppCompatActivity() {
         binding.camera.addCameraListener(object : CameraListener() {
             override fun onPictureTaken(result: PictureResult) {
                 super.onPictureTaken(result)
-                val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
-                intent.putExtra("image", result.data)
-                intent.putExtra(MainActivity.EXTRA_MODEL, model)
-                startActivity(intent)
+
+                try{
+                    val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
+                    intent.putExtra("image", result.data)
+                    intent.putExtra(MainActivity.EXTRA_MODEL, model)
+                    startActivity(intent)
+                }
+                catch (e:Throwable){
+                    e.printStackTrace()
+                }
             }
         })
 

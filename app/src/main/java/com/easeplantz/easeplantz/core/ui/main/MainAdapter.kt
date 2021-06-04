@@ -42,11 +42,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
             with(binding) {
                 Picasso.get().load(menu.image).into(binding.ivPlant)
                 tvName.text = menu.title
-                itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, ImageActivity::class.java)
-                    intent.putExtra(ImageActivity.EXTRA_OPTION,menu.id)
-                    itemView.context.startActivity(intent)
-                }
             }
         }
 

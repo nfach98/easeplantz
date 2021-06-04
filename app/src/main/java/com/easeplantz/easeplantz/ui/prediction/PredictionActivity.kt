@@ -38,7 +38,7 @@ class PredictionActivity : AppCompatActivity() {
             val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
             binding.ivImage.setImageBitmap(bmp)
 
-            file = File(cacheDir, "model.png")
+            file = File(cacheDir, "model.jpg")
             file.createNewFile()
             val fos = FileOutputStream(file)
             fos.write(image)
