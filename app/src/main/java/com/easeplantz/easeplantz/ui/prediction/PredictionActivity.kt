@@ -55,17 +55,14 @@ class PredictionActivity : AppCompatActivity() {
         binding.home.setOnClickListener { finish() }
 
         binding.btnDetect.setOnClickListener {
-            binding.loading.visibility = View.VISIBLE
-
             val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
+
+            binding.loading.startRippleAnimation()
 
             viewModel.getPrediction(model, part, true).observe(this, { prediction ->
                 if(prediction != null){
                     when(prediction){
-                        is Resource.Loading -> {
-                            binding.loading.visibility = View.VISIBLE
-                        }
                         is Resource.Success -> {
                             val intent = Intent(this@PredictionActivity, ResultActivity::class.java)
                             intent.putExtra(MainActivity.EXTRA_MODEL, model)

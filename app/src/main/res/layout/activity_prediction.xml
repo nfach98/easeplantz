@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.motion.widget.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.prediction.PredictionActivity">
+    tools:context=".ui.prediction.PredictionActivity"
+    app:layoutDescription="@xml/activity_prediction_scene">
 
     <ImageView
         android:id="@+id/iv_image"
@@ -29,6 +30,21 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/blue_dark" />
 
+    <TextView
+        android:id="@+id/tv_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingHorizontal="20dp"
+        android:gravity="center"
+        android:text="@string/message_wait"
+        android:textColor="@color/blue"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_detect"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
     <ImageView
         android:id="@+id/btn_detect"
         android:layout_width="0dp"
@@ -37,6 +53,7 @@
         android:layout_margin="12dp"
         android:src="@drawable/ic_baseline_arrow_forward_24"
         android:background="@drawable/bg_circle_green_blue"
+        app:layout_constraintVertical_chainStyle="packed"
         app:tint="@color/white"
         app:layout_constraintWidth_percent="0.2"
         app:layout_constraintDimensionRatio="1.0"
@@ -44,40 +61,30 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.gauravbhola.ripplepulsebackground.RipplePulseLayout
         android:id="@+id/loading"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:background="@color/white">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="20dp"
+        android:layout_margin="12dp"
+        android:clipChildren="false"
+        app:rippleColor="@color/green"
+        app:rippleType="stroke"
+        app:strokeWidth="2dp"
+        app:startRadius="42dp"
+        app:endRadius="100dp"
+        app:duration="2000"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintDimensionRatio="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminateTint="@color/green"
-            app:layout_constraintVertical_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_loading"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/leaves"/>
 
-        <TextView
-            android:id="@+id/tv_loading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:paddingHorizontal="20dp"
-            android:gravity="center"
-            android:text="@string/message_wait"
-            android:textColor="@color/blue"
-            android:textStyle="bold"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/progress_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+    </com.gauravbhola.ripplepulsebackground.RipplePulseLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
