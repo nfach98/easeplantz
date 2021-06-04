@@ -86,7 +86,8 @@
             app:layout_constraintStart_toStartOf="@id/btn_detect"
             app:layout_constraintDimensionRatio="1.0"
             app:layout_constraintBottom_toTopOf="@id/tv_loading"
-            app:layout_constraintTop_toTopOf="@id/btn_detect" />
+            app:layout_constraintTop_toTopOf="@id/btn_detect"
+            app:layout_constraintWidth_percent="0.5" />
         <Constraint
             android:id="@+id/leaves"
             app:layout_constraintEnd_toEndOf="@id/btn_detect"

@@ -66,11 +66,10 @@
         android:id="@+id/loading"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:padding="20dp"
-        app:pulse_count="4"
-        app:pulse_duration="500"
+        app:pulse_count="12"
+        app:pulse_duration="1000"
         app:pulse_repeat="0"
-        app:pulse_color="@color/green"
+        app:pulse_color="#28F45D"
         app:pulse_startFromScratch="false"
         app:pulse_interpolator="Linear"/>
 
