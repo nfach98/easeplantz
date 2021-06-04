@@ -14,7 +14,7 @@ import okhttp3.MultipartBody
 
 class RemoteDataSource constructor(private val apiServices: ApiServices) {
     @SuppressLint("CheckResult")
-    fun getPrediction(model: String, image: MultipartBody.Part): Flowable<ApiResponse<PredictionResponse>> {
+    fun getPrediction(model: String, image: MultipartBody.Part?): Flowable<ApiResponse<PredictionResponse>> {
         val resultData = PublishSubject.create<ApiResponse<PredictionResponse>>()
 
         val client = apiServices.getPrediction(model, image)

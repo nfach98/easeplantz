@@ -9,7 +9,7 @@ import com.easeplantz.easeplantz.core.domain.usecase.EaseplantzUseCase
 import okhttp3.MultipartBody
 
 class ResultViewModel constructor(private val useCase: EaseplantzUseCase) : ViewModel() {
-    fun getPrediction(model: String, image: MultipartBody.Part, shouldFetch: Boolean) : LiveData<Resource<Prediction>>{
+    fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean) : LiveData<Resource<Prediction>>{
         return LiveDataReactiveStreams.fromPublisher(useCase.getPrediction(model, image, shouldFetch))
     }
 }

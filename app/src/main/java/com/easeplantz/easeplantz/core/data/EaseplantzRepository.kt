@@ -19,7 +19,7 @@ class EaseplantzRepository constructor(
     private val appExecutors: AppExecutors
     ): IEaseplantzRepository {
 
-    override fun getPrediction(model: String, image: MultipartBody.Part, shouldFetch: Boolean): Flowable<Resource<Prediction>>  =
+    override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<Prediction>>  =
         object : NetworkBoundResource<Prediction, PredictionResponse>(appExecutors) {
             override fun loadFromDB(): Flowable<Prediction> {
                 return localDataSource.getPrediction(model).map {

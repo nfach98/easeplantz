@@ -13,6 +13,6 @@ interface ApiServices {
     @POST("upload")
     fun getPrediction(
         @Query("model") model: String,
-        @Part image: MultipartBody.Part
+        @Part image: MultipartBody.Part?
     ): Flowable<PredictionResponse>
 }

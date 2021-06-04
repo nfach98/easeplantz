@@ -8,6 +8,7 @@ import com.easeplantz.easeplantz.core.data.Resource
 import com.easeplantz.easeplantz.databinding.ActivityResultBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.prediction.PredictionViewModel
+import com.squareup.picasso.Picasso
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ResultActivity : AppCompatActivity() {
@@ -27,17 +28,18 @@ class ResultActivity : AppCompatActivity() {
         binding.home.setOnClickListener(onClickFinish)
         binding.homeNoBg.setOnClickListener(onClickFinish)
 
-       /* viewModel.getPrediction(model, "",false).observe(this, { prediction ->
+        viewModel.getPrediction(model, null,false).observe(this, { prediction ->
             if(prediction != null){
                 when(prediction){
                     is Resource.Success -> {
-
+                        Picasso.get().load(prediction.data?.url).into(binding.ivDetect)
+                        binding.tvName.text = prediction.data?.disease
                     }
                     else -> {
 
                     }
                 }
             }
-        })*/
+        })
     }
 }
