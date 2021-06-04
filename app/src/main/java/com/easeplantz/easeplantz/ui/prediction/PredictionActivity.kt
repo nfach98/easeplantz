@@ -57,7 +57,7 @@ class PredictionActivity : AppCompatActivity() {
             val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
 
-            binding.loading.startRippleAnimation()
+            binding.loading.start()
             binding.layout.transitionToEnd()
 
             viewModel.getPrediction(model, part, true).observe(this, { prediction ->
