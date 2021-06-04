@@ -3,7 +3,6 @@ package com.easeplantz.easeplantz.ui.prediction
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.core.data.Resource
 import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
@@ -59,6 +58,7 @@ class PredictionActivity : AppCompatActivity() {
             val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
 
             binding.loading.startRippleAnimation()
+            binding.layout.transitionToEnd()
 
             viewModel.getPrediction(model, part, true).observe(this, { prediction ->
                 if(prediction != null){

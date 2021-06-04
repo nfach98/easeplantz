@@ -98,6 +98,19 @@
                 android:alpha="0" />
 
             <KeyAttribute
+                motion:motionTarget="@id/btn_detect"
+                motion:framePosition="0"
+                android:alpha="1" />
+            <KeyAttribute
+                motion:motionTarget="@id/btn_detect"
+                motion:framePosition="30"
+                android:alpha="0" />
+            <KeyAttribute
+                motion:motionTarget="@id/btn_detect"
+                motion:framePosition="100"
+                android:alpha="0" />
+
+            <KeyAttribute
                 motion:motionTarget="@id/tv_loading"
                 motion:framePosition="0"
                 android:alpha="0" />
@@ -123,6 +136,6 @@
                 motion:framePosition="100"
                 android:alpha="1" />
         </KeyFrameSet>
-        <OnClick app:targetId="@+id/btn_detect" />
+<!--        <OnClick app:targetId="@+id/btn_detect" />-->
     </Transition>
 </MotionScene>
