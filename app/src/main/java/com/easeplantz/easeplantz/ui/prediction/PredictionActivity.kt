@@ -3,7 +3,6 @@ package com.easeplantz.easeplantz.ui.prediction
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.core.data.Resource
@@ -11,7 +10,6 @@ import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.result.ResultActivity
 import com.squareup.picasso.Picasso
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
