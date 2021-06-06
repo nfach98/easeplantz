@@ -37,7 +37,7 @@ val networkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl("https://support.bemcandra.ga:5050/")
+            .baseUrl("https://api.easeplantz.ml/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(get())
