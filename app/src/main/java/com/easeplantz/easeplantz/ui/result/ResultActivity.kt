@@ -28,7 +28,7 @@ class ResultActivity : AppCompatActivity() {
         binding.home.setOnClickListener(onClickFinish)
         binding.homeNoBg.setOnClickListener(onClickFinish)
 
-        viewModel.getPrediction(model, null,false).observe(this, { prediction ->
+        /*viewModel.getPrediction(model, null,false).observe(this, { prediction ->
             if(prediction != null){
                 when(prediction){
                     is Resource.Success -> {
@@ -40,6 +40,6 @@ class ResultActivity : AppCompatActivity() {
                     }
                 }
             }
-        })
+        })*/
     }
 }

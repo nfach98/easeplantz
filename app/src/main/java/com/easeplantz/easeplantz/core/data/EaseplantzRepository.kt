@@ -5,6 +5,7 @@ import com.easeplantz.easeplantz.core.data.source.remote.RemoteDataSource
 import com.easeplantz.easeplantz.core.data.source.remote.network.ApiResponse
 import com.easeplantz.easeplantz.core.data.source.remote.response.PredictionResponse
 import com.easeplantz.easeplantz.core.domain.model.Prediction
+import com.easeplantz.easeplantz.core.domain.model.Result
 import com.easeplantz.easeplantz.core.domain.repository.IEaseplantzRepository
 import com.easeplantz.easeplantz.core.utils.AppExecutors
 import com.easeplantz.easeplantz.core.utils.DataMapper
@@ -40,4 +41,10 @@ class EaseplantzRepository constructor(
                     .subscribe()
             }
         }.asFlowable()
+
+    override fun getResult(id: Int): Flowable<Result> {
+        return localDataSource.getResult(id).map {
+            DataMapper.mapResultEntitiesToDomain(it)
+        }
+    }
 }
