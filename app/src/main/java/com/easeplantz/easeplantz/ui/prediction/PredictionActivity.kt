@@ -3,6 +3,8 @@ package com.easeplantz.easeplantz.ui.prediction
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.core.data.Resource
 import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
@@ -37,7 +39,7 @@ class PredictionActivity : AppCompatActivity() {
             val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
             binding.ivImage.setImageBitmap(bmp)
 
-            file = File(cacheDir, "model.jpg")
+            file = File(cacheDir, "$model.jpg")
             file.createNewFile()
             val fos = FileOutputStream(file)
             fos.write(image)
@@ -70,7 +72,13 @@ class PredictionActivity : AppCompatActivity() {
                             finish()
                         }
                         else -> {
-
+                            binding.loading.stop()
+                            binding.layout.transitionToStart()
+                            Toast.makeText(
+                                this@PredictionActivity,
+                                "Failed request. Please try again",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
