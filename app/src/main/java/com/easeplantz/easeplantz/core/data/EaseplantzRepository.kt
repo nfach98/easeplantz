@@ -1,5 +1,6 @@
 package com.easeplantz.easeplantz.core.data
 
+import android.util.Log
 import com.easeplantz.easeplantz.core.data.source.local.LocalDataSource
 import com.easeplantz.easeplantz.core.data.source.remote.RemoteDataSource
 import com.easeplantz.easeplantz.core.data.source.remote.network.ApiResponse
@@ -23,9 +24,7 @@ class EaseplantzRepository constructor(
     override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<Prediction>>  =
         object : NetworkBoundResource<Prediction, PredictionResponse>(appExecutors) {
             override fun loadFromDB(): Flowable<Prediction> {
-                return localDataSource.getPrediction(model).map {
-                    DataMapper.mapPredictionEntitiesToDomain(it)
-                }
+                return localDataSource.getPrediction(model).map { DataMapper.mapPredictionEntitiesToDomain(it) }
             }
 
             override fun shouldFetch(data: Prediction?): Boolean = shouldFetch
