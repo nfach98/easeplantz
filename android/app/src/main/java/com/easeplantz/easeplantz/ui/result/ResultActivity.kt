@@ -34,10 +34,11 @@ class ResultActivity : AppCompatActivity() {
         binding.homeNoBg.setOnClickListener(onClickFinish)
 
         Log.d("bisa", prediction.toString())
-//        if(prediction != null){
-//            Log.d("bisa", "bisa")
-//            val results = Data.mainResultData()
-//        }
+        if(prediction != null){
+            val results = Data.mainResultData()
+
+            Picasso.get().load(prediction!!.url).into(binding.ivDetect)
+        }
     }
 
     companion object {

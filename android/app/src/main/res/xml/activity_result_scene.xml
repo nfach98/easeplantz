@@ -99,13 +99,13 @@
         <Constraint
             android:id="@+id/iv_detect"
             android:elevation="0dp"
-            motion:layout_constraintWidth_percent="0.4"
+            motion:layout_constraintWidth_percent="0.6"
             motion:layout_constraintEnd_toEndOf="@id/view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="32dp"
             motion:layout_constraintTop_toBottomOf="@id/home"
-            motion:layout_constraintDimensionRatio="0.7"
+            motion:layout_constraintDimensionRatio="1.0"
             motion:layout_constraintStart_toStartOf="@id/view" />
         <Constraint
             android:id="@+id/tv_name"
@@ -194,11 +194,11 @@
         <Constraint
             android:id="@+id/iv_detect"
             android:elevation="0dp"
-            motion:layout_constraintWidth_percent="0.4"
+            motion:layout_constraintWidth_percent="0.6"
             motion:layout_constraintEnd_toEndOf="parent"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            motion:layout_constraintDimensionRatio="0.7"
+            motion:layout_constraintDimensionRatio="1.0"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
         <Constraint
