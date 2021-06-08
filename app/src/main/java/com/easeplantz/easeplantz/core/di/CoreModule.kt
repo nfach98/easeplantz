@@ -9,6 +9,7 @@ import com.easeplantz.easeplantz.core.data.source.remote.network.ApiServices
 import com.easeplantz.easeplantz.core.domain.repository.IEaseplantzRepository
 import com.easeplantz.easeplantz.core.utils.AppExecutors
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -33,6 +34,7 @@ val networkModule = module {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
+            .protocols(listOf(Protocol.HTTP_1_1))
             .build()
     }
     single {

@@ -17,7 +17,19 @@ object DataMapper {
             prediction = input.prediction,
         )
 
-    fun mapPredictionEntitiesToDomain(input: PredictionEntity): Prediction =
+    fun mapPredictionEntitiesToDomain(input: List<PredictionEntity>): List<Prediction> =
+        input.map {
+            Prediction(
+                status = it.status,
+                filename = it.filename,
+                model = it.model,
+                url = it.url,
+                disease = it.disease,
+                prediction = it.prediction,
+            )
+        }
+
+    fun mapPredictionEntityToDomain(input: PredictionEntity): Prediction =
         Prediction(
             status = input.status,
             filename = input.filename,
@@ -27,7 +39,16 @@ object DataMapper {
             prediction = input.prediction,
         )
 
-    fun mapResultEntitiesToDomain(input: ResultEntity): Result =
+    fun mapResultEntitiesToDomain(input: List<ResultEntity>): List<Result> =
+        input.map {
+            Result(
+                id = it.id,
+                disease = it.disease,
+                description = it.description,
+            )
+        }
+
+    fun mapResultEntityToDomain(input: ResultEntity): Result =
         Result(
             id = input.id,
             disease = input.disease,

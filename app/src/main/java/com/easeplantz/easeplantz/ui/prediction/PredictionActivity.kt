@@ -59,13 +59,16 @@ class PredictionActivity : AppCompatActivity() {
             val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
             val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
 
+            binding.loading.start()
+            binding.layout.transitionToEnd()
+
             viewModel.getPrediction(model, part, true).observe(this, { prediction ->
                 if(prediction != null){
                     when(prediction){
-                        is Resource.Loading -> {
-                            binding.loading.start()
-                            binding.layout.transitionToEnd()
-                        }
+//                        is Resource.Loading -> {
+//                            binding.loading.start()
+//                            binding.layout.transitionToEnd()
+//                        }
                         is Resource.Success -> {
                             val intent = Intent(this@PredictionActivity, ResultActivity::class.java)
                             intent.putExtra(MainActivity.EXTRA_MODEL, model)

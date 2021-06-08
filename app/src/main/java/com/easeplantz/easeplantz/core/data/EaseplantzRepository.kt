@@ -1,6 +1,5 @@
 package com.easeplantz.easeplantz.core.data
 
-import android.util.Log
 import com.easeplantz.easeplantz.core.data.source.local.LocalDataSource
 import com.easeplantz.easeplantz.core.data.source.remote.RemoteDataSource
 import com.easeplantz.easeplantz.core.data.source.remote.network.ApiResponse
@@ -21,13 +20,13 @@ class EaseplantzRepository constructor(
     private val appExecutors: AppExecutors
     ): IEaseplantzRepository {
 
-    override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<Prediction>>  =
-        object : NetworkBoundResource<Prediction, PredictionResponse>(appExecutors) {
-            override fun loadFromDB(): Flowable<Prediction> {
+    override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<List<Prediction>>>  =
+        object : NetworkBoundResource<List<Prediction>, PredictionResponse>(appExecutors) {
+            override fun loadFromDB(): Flowable<List<Prediction>> {
                 return localDataSource.getPrediction(model).map { DataMapper.mapPredictionEntitiesToDomain(it) }
             }
 
-            override fun shouldFetch(data: Prediction?): Boolean = shouldFetch
+            override fun shouldFetch(data: List<Prediction>?): Boolean = shouldFetch
 
             override fun createCall(): Flowable<ApiResponse<PredictionResponse>> =
                 remoteDataSource.getPrediction(model, image)
@@ -41,7 +40,7 @@ class EaseplantzRepository constructor(
             }
         }.asFlowable()
 
-    override fun getResult(id: Int): Flowable<Result> {
+    override fun getResult(id: Int): Flowable<List<Result>> {
         return localDataSource.getResult(id).map {
             DataMapper.mapResultEntitiesToDomain(it)
         }

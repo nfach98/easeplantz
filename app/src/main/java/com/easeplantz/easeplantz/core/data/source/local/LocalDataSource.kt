@@ -6,9 +6,9 @@ import com.easeplantz.easeplantz.core.data.source.local.room.EaseplantzDao
 import io.reactivex.Flowable
 
 class LocalDataSource constructor(private val dao: EaseplantzDao) {
-    fun getPrediction(model: String): Flowable<PredictionEntity> = dao.getPrediction(model)
+    fun getPrediction(model: String): Flowable<List<PredictionEntity>> = dao.getPrediction(model)
 
-    fun getResult(id: Int): Flowable<ResultEntity> = dao.getResult(id)
+    fun getResult(id: Int): Flowable<List<ResultEntity>> = dao.getResult(id)
 
     fun insertPrediction(prediction: PredictionEntity) = dao.insertPrediction(prediction)
 }

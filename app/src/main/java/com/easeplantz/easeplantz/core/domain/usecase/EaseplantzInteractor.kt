@@ -8,8 +8,8 @@ import io.reactivex.Flowable
 import okhttp3.MultipartBody
 
 class EaseplantzInteractor(private val repository: IEaseplantzRepository) : EaseplantzUseCase {
-    override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<Prediction>> =
+    override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<List<Prediction>>> =
         repository.getPrediction(model, image, shouldFetch)
 
-    override fun getResult(id: Int): Flowable<Result> = repository.getResult(id)
+    override fun getResult(id: Int): Flowable<List<Result>> = repository.getResult(id)
 }

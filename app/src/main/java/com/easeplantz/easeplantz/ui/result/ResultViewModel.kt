@@ -10,7 +10,7 @@ import com.easeplantz.easeplantz.core.domain.usecase.EaseplantzUseCase
 import okhttp3.MultipartBody
 
 class ResultViewModel constructor(private val useCase: EaseplantzUseCase) : ViewModel() {
-    fun getResult(id: Int) : LiveData<Result>{
+    fun getResult(id: Int) : LiveData<List<Result>>{
         return LiveDataReactiveStreams.fromPublisher(useCase.getResult(id))
     }
 }

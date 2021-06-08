@@ -9,10 +9,10 @@ import io.reactivex.Flowable
 @Dao
 interface EaseplantzDao {
     @Query("SELECT * FROM prediction WHERE model = :model")
-    fun getPrediction(model: String): Flowable<PredictionEntity>
+    fun getPrediction(model: String): Flowable<List<PredictionEntity>>
 
     @Query("SELECT * FROM result WHERE id = :id")
-    fun getResult(id: Int): Flowable<ResultEntity>
+    fun getResult(id: Int): Flowable<List<ResultEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPrediction(prediction: PredictionEntity): Completable

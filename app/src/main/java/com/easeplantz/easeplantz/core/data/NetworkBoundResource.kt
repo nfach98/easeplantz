@@ -15,21 +15,22 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
     private val mCompositeDisposable = CompositeDisposable()
 
     init {
-        @Suppress("LeakingThis")
-        val dbSource = loadFromDB()
-        val db = dbSource
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe { value ->
-                dbSource.unsubscribeOn(Schedulers.io())
-                if (shouldFetch(value)) {
-                    fetchFromNetwork()
-                } else {
-                    result.onNext(Resource.Success(value))
-                }
-            }
-        mCompositeDisposable.add(db)
+        fetchFromNetwork()
+
+//        @Suppress("LeakingThis")
+//        val dbSource = loadFromDB()
+//        val db = dbSource
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .take(1)
+//            .subscribe { value ->
+//                dbSource.unsubscribeOn(Schedulers.io())
+//                if (shouldFetch(value)) {
+//                } else {
+//                    result.onNext(Resource.Success(value))
+//                }
+//            }
+//        mCompositeDisposable.add(db)
     }
 
     protected open fun onFetchFailed() {
@@ -45,7 +46,6 @@ abstract class NetworkBoundResource<ResultType, RequestType>(private val mExecut
     protected abstract fun saveCallResult(data: RequestType)
 
     private fun fetchFromNetwork() {
-
         val apiResponse = createCall()
         result.onNext(Resource.Loading(null))
         val response = apiResponse
