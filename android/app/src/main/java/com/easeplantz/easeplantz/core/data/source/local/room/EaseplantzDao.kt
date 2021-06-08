@@ -11,8 +11,8 @@ interface EaseplantzDao {
     @Query("SELECT * FROM prediction WHERE model = :model")
     fun getPrediction(model: String): Flowable<List<PredictionEntity>>
 
-    @Query("SELECT * FROM result WHERE id = :id")
-    fun getResult(id: Int): Flowable<List<ResultEntity>>
+    @Query("SELECT * FROM result WHERE disease = :disease")
+    fun getResult(disease: String): Flowable<List<ResultEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPrediction(prediction: PredictionEntity): Completable

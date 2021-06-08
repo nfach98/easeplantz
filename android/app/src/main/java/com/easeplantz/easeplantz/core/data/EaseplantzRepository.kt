@@ -26,7 +26,8 @@ class EaseplantzRepository constructor(
                 return localDataSource.getPrediction(model).map { DataMapper.mapPredictionEntitiesToDomain(it) }
             }
 
-            override fun shouldFetch(data: List<Prediction>?): Boolean = shouldFetch
+            override fun shouldFetch(data: List<Prediction>?): Boolean =
+                data == null || data.isEmpty()
 
             override fun createCall(): Flowable<ApiResponse<PredictionResponse>> =
                 remoteDataSource.getPrediction(model, image)
@@ -40,8 +41,8 @@ class EaseplantzRepository constructor(
             }
         }.asFlowable()
 
-    override fun getResult(id: Int): Flowable<List<Result>> {
-        return localDataSource.getResult(id).map {
+    override fun getResult(disease: String): Flowable<List<Result>> {
+        return localDataSource.getResult(disease).map {
             DataMapper.mapResultEntitiesToDomain(it)
         }
     }

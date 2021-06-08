@@ -9,5 +9,5 @@ import okhttp3.MultipartBody
 interface IEaseplantzRepository {
     fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean) : Flowable<Resource<List<Prediction>>>
 
-    fun getResult(id: Int) : Flowable<List<Result>>
+    fun getResult(disease: String) : Flowable<List<Result>>
 }
