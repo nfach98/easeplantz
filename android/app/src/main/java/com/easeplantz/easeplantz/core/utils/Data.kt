@@ -2,6 +2,7 @@ package com.easeplantz.easeplantz.core.utils
 
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.core.data.source.local.entity.MainEntity
+import com.easeplantz.easeplantz.core.data.source.local.entity.ResultEntity
 
 object Data {
     fun mainMenuData(): ArrayList<MainEntity> {
@@ -174,6 +175,7 @@ object Data {
                     "Berlatih rotasi tanaman; putar dengan tanaman non-rumput.\n"
         ))
 
+        return results
     }
 
 }
