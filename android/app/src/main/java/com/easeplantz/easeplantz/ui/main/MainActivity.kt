@@ -8,9 +8,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.easeplantz.easeplantz.core.ui.main.MainAdapter
 import com.easeplantz.easeplantz.databinding.ActivityMainBinding
 import com.easeplantz.easeplantz.ui.image.ImageActivity
+import com.easeplantz.easeplantz.ui.prediction.PredictionViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel: MainViewModel by viewModel()
     private lateinit var binding: ActivityMainBinding
 
     companion object {
@@ -22,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory() )[MainViewModel::class.java]
         val menus = viewModel.getMenus()
 
         val mainAdapter = MainAdapter()

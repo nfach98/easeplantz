@@ -7,7 +7,7 @@ import com.easeplantz.easeplantz.core.domain.model.Prediction
 import com.easeplantz.easeplantz.core.domain.model.Result
 
 object DataMapper {
-    fun mapPredictionResponsesToEntities(input: PredictionResponse): PredictionEntity =
+    fun mapPredictionResponseToEntity(input: PredictionResponse): PredictionEntity =
         PredictionEntity(
             status = input.status,
             filename = input.filename,

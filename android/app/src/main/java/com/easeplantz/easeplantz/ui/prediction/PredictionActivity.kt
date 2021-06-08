@@ -71,6 +71,7 @@ class PredictionActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             val intent = Intent(this@PredictionActivity, ResultActivity::class.java)
                             intent.putExtra(MainActivity.EXTRA_MODEL, model)
+                            intent.putExtra(ResultActivity.EXTRA_PREDICTION, prediction.data)
                             startActivity(intent)
                             finish()
                         }
