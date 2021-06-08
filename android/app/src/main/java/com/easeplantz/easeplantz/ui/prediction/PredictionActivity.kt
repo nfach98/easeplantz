@@ -3,7 +3,6 @@ package com.easeplantz.easeplantz.ui.prediction
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.easeplantz.easeplantz.core.data.Resource

@@ -11,5 +11,5 @@ class EaseplantzInteractor(private val repository: IEaseplantzRepository) : Ease
     override fun getPrediction(model: String, image: MultipartBody.Part?, shouldFetch: Boolean): Flowable<Resource<List<Prediction>>> =
         repository.getPrediction(model, image, shouldFetch)
 
-    override fun getResult(id: Int): Flowable<List<Result>> = repository.getResult(id)
+    override fun getResult(disease: String): Flowable<List<Result>> = repository.getResult(disease)
 }
