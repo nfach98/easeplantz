@@ -1,18 +1,12 @@
 package com.easeplantz.easeplantz.core.ui.main
 
-import android.content.Intent
-import android.graphics.Outline
-import android.os.Build
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.view.ViewOutlineProvider
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.easeplantz.easeplantz.core.data.source.local.entity.MainEntity
 import com.easeplantz.easeplantz.databinding.ItemsPlantBinding
-import com.easeplantz.easeplantz.ui.image.ImageActivity
 import com.squareup.picasso.Picasso
+
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     private var listData = ArrayList<MainEntity>()
@@ -40,7 +34,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.MainViewHolder>() {
     inner class MainViewHolder(private val binding: ItemsPlantBinding) : RecyclerView.ViewHolder(binding.root){
         fun bind(menu: MainEntity) {
             with(binding) {
-                Picasso.get().load(menu.image).into(binding.ivPlant)
+                Picasso.get().load(menu.image).into(ivPlant)
                 tvName.text = menu.title
             }
         }
