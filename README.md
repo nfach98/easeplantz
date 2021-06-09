@@ -13,7 +13,7 @@ easeplantz is a plant diseases detection application developed using the Kotlin 
 2. The user enter pictures of leaves through albums or can take photos of leaves directly using the application's camera
 3. The image is sent to the server and will return the prediction results along with recommendations for handling the disease
 
-## Contributor
+## Contributors
 This Easeplantz Repository was a part of the Easeplantz Capstone Project from Bangkit Academy 2021 Program. Please welcome the contributors of this project:
 
 - A2842630 - Nino Fachrurozy
