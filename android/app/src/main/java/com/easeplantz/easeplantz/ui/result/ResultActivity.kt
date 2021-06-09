@@ -45,9 +45,17 @@ class ResultActivity : AppCompatActivity() {
 
         Log.d("bisa", prediction.toString())
         if(prediction != null){
-            val results = Data.mainResultData()
+            val result = Data.mainResultData().filter {
+                it.disease.equals(prediction?.disease, ignoreCase = true)
+            }
 
-            Picasso.get().load(prediction!!.url).into(binding.ivDetect)
+            with(binding){
+                Picasso.get().load(prediction!!.url).into(ivDetect)
+                tvName.text = result[0].disease
+                tvTitle.text = result[0].disease
+
+                tvOverview.text = result[0].description
+            }
         }
     }
 
