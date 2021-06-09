@@ -53,7 +53,8 @@ class ResultActivity : AppCompatActivity() {
                 Picasso.get().load(prediction!!.url).into(ivDetect)
                 tvName.text = result[0].disease
                 tvTitle.text = result[0].disease
-                tvOverview.text = result[0].description
+                tvAccuracy.text = "${prediction?.prediction} %"
+                tvRecommendation.text = result[0].description
             }
         }
     }
