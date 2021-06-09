@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">easeplantz</string>
     <string name="title">nama item</string>
+    <string name="corn">Corn</string>
+    <string name="tomato">Tomato</string>
+    <string name="potato">Potato</string>
+    <string name="plant_disease">%1$s Disease</string>
     <string name="choose_plants">Choose plants</string>
     <string name="message_wait">Wait a second … \neaseplantz is processing your data</string>
     <string name="recommendation">Treatment recommendation</string>

@@ -48,52 +48,62 @@ class ImageActivity : AppCompatActivity() {
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()
 
-        binding.camera.setLifecycleOwner(this)
-        binding.camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM)
-        binding.camera.mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
-        binding.camera.addCameraListener(object : CameraListener() {
-            override fun onPictureTaken(result: PictureResult) {
-                super.onPictureTaken(result)
-
-                try{
-                    val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
-                    intent.putExtra("image", result.data)
-                    intent.putExtra(MainActivity.EXTRA_MODEL, model)
-                    startActivity(intent)
-                }
-                catch (e:Throwable){
-                    e.printStackTrace()
-                }
+        with(binding){
+            val idString = when(model){
+                "corn" -> R.string.corn
+                "tomato" -> R.string.tomato
+                "potato" -> R.string.potato
+                else -> R.string.corn
             }
-        })
+            tvPlant.text = String.format(resources.getString(R.string.plant_disease), resources.getString(idString))
 
-        binding.home.setOnClickListener { finish() }
+            camera.setLifecycleOwner(this@ImageActivity)
+            camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM)
+            camera.mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
+            camera.addCameraListener(object : CameraListener() {
+                override fun onPictureTaken(result: PictureResult) {
+                    super.onPictureTaken(result)
 
-        binding.btnFlash.setOnClickListener {
-            if(flashMode < 2) flashMode++
-            else flashMode = 0
-            setFlash(flashMode)
-        }
+                    try{
+                        val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
+                        intent.putExtra("image", result.data)
+                        intent.putExtra(MainActivity.EXTRA_MODEL, model)
+                        startActivity(intent)
+                    }
+                    catch (e:Throwable){
+                        e.printStackTrace()
+                    }
+                }
+            })
 
-        binding.btnCamera.setOnClickListener {
-            binding.camera.takePicture()
-        }
+            home.setOnClickListener { finish() }
 
-        binding.btnGallery.setOnClickListener {
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                    //permission denied
-                    val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                    requestPermissions(permissions, PERMISSION_CODE)
+            btnFlash.setOnClickListener {
+                if(flashMode < 2) flashMode++
+                else flashMode = 0
+                setFlash(flashMode)
+            }
+
+            btnCamera.setOnClickListener {
+                camera.takePicture()
+            }
+
+            btnGallery.setOnClickListener {
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        //permission denied
+                        val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                        requestPermissions(permissions, PERMISSION_CODE)
+                    }
+                    else {
+                        //permission already granted
+                        pickImageFromGallery()
+                    }
                 }
                 else {
-                    //permission already granted
+                    //system OS is < Marshmallow
                     pickImageFromGallery()
                 }
-            }
-            else {
-                //system OS is < Marshmallow
-                pickImageFromGallery()
             }
         }
     }

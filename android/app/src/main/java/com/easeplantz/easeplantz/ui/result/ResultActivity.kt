@@ -45,7 +45,7 @@ class ResultActivity : AppCompatActivity() {
 
         Log.d("bisa", prediction.toString())
         if(prediction != null){
-            val result = Data.mainResultData().filter {
+            val result = Data(this).mainResultData().filter {
                 it.disease.equals(prediction?.disease, ignoreCase = true)
             }
 

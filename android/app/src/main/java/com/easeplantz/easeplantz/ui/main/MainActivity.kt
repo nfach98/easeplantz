@@ -9,6 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.core.ui.main.MainAdapter
+import com.easeplantz.easeplantz.core.utils.Data
 import com.easeplantz.easeplantz.databinding.ActivityMainBinding
 import com.easeplantz.easeplantz.ui.image.ImageActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         }
         setContentView(binding.root)
 
-        val menus = viewModel.getMenus()
+        val menus = Data(this).mainMenuData()
 
         val mainAdapter = MainAdapter()
         mainAdapter.onItemClick = { selectedData ->
