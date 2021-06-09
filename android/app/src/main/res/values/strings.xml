@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">easeplantz</string>
     <string name="title">nama item</string>
-    <string name="choose_plants">Pilih tumbuhan</string>
-    <string name="message_wait">Tunggu sebentar … \neaseplantz sedang memproses data Anda</string>
-    <string name="recommendation">Rekomendasi perawatan</string>
-    <string name="detection_result">Hasil deteksi:</string>
+    <string name="choose_plants">Choose plants</string>
+    <string name="message_wait">Wait a second … \neaseplantz is processing your data</string>
+    <string name="recommendation">Treatment recommendation</string>
+    <string name="detection_result">Detection result:</string>
 </resources>
