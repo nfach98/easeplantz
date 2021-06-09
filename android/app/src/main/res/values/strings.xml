@@ -4,5 +4,5 @@
     <string name="choose_plants">Pilih tumbuhan</string>
     <string name="message_wait">Tunggu sebentar … \neaseplantz sedang memproses data Anda</string>
     <string name="recommendation">Rekomendasi perawatan</string>
-    <string name="detection_result">Hasil deteksi</string>
+    <string name="detection_result">Hasil deteksi:</string>
 </resources>
