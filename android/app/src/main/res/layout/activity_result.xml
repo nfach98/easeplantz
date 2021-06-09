@@ -40,13 +40,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/white" />
 
-    <ImageView
+    <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/iv_detect"
         android:transitionName="poster"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:elevation="8dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="20dp"
         app:layout_constraintDimensionRatio="1.0"
         app:layout_constraintEnd_toEndOf="@id/view"
         app:layout_constraintStart_toStartOf="@id/view"
