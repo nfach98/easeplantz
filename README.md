@@ -3,7 +3,7 @@
 # easeplantz
 
 ## Overview
-Easeplantz is a plant diseases detection application developed using the Kotlin language. This application utilizes machine learning built using tensorflow and keras. Easeplantz has two main key features, which are:
+easeplantz is a plant diseases detection application developed using the Kotlin language. This application utilizes machine learning built using tensorflow and keras. Easeplantz has two main key features, which are:
 
 - **Plant disease diagnosis**. User took picture of the leaf or pick the picture from gallery and easeplantz will give the diagnosis
 - **Recommendations**. After getting the diagnosis, application will also tell the user about what is the right way to treat the disease
