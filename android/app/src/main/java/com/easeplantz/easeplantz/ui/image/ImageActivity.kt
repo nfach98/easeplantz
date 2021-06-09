@@ -1,15 +1,17 @@
 package com.easeplantz.easeplantz.ui.image
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.view.Window
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
@@ -29,10 +31,9 @@ class ImageActivity : AppCompatActivity() {
     private var flashMode = 0
 
     companion object {
-        const val EXTRA_OPTION = "extra_option"
-        private const val REQUEST_CODE = 42
         private const val IMAGE_PICK_CODE = 1000
-        private const val PERMISSION_CODE = 1001
+        private const val PERMISSION_CAMERA = 1001
+        private const val PERMISSION_GALLERY = 1002
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,8 +64,12 @@ class ImageActivity : AppCompatActivity() {
             camera.addCameraListener(object : CameraListener() {
                 override fun onPictureTaken(result: PictureResult) {
                     super.onPictureTaken(result)
-
-                    try{
+                    Log.d("camerane", "iso")
+                    val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
+                    intent.putExtra("image", result.data)
+                    intent.putExtra(MainActivity.EXTRA_MODEL, model)
+                    startActivity(intent)
+                    /*try{
                         val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
                         intent.putExtra("image", result.data)
                         intent.putExtra(MainActivity.EXTRA_MODEL, model)
@@ -72,7 +77,7 @@ class ImageActivity : AppCompatActivity() {
                     }
                     catch (e:Throwable){
                         e.printStackTrace()
-                    }
+                    }*/
                 }
             })
 
@@ -85,23 +90,31 @@ class ImageActivity : AppCompatActivity() {
             }
 
             btnCamera.setOnClickListener {
-                camera.takePicture()
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+                        val permissions = arrayOf(Manifest.permission.CAMERA)
+                        requestPermissions(permissions, PERMISSION_CAMERA)
+                    }
+                    else {
+                        camera.takePicture()
+                    }
+                }
+                else{
+                    camera.takePicture()
+                }
             }
 
             btnGallery.setOnClickListener {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        //permission denied
-                        val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
-                        requestPermissions(permissions, PERMISSION_CODE)
+                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                        requestPermissions(permissions, PERMISSION_GALLERY)
                     }
                     else {
-                        //permission already granted
                         pickImageFromGallery()
                     }
                 }
                 else {
-                    //system OS is < Marshmallow
                     pickImageFromGallery()
                 }
             }
@@ -118,13 +131,6 @@ class ImageActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        /*if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            val takenImage = data?.extras?.get("data") as Bitmap
-            val intent = Intent(this@ImageActivity, DetectActivity::class.java)
-            intent.putExtra("image", takenImage)
-            startActivity(intent)
-        }*/
-
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.data
             val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
@@ -136,7 +142,15 @@ class ImageActivity : AppCompatActivity() {
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when (requestCode) {
-            PERMISSION_CODE -> {
+            PERMISSION_CAMERA -> {
+                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    binding.camera.takePicture()
+                }
+                else{
+                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+            PERMISSION_GALLERY -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     pickImageFromGallery()
                 }
