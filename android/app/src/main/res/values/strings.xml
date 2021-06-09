@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">easeplantz</string>
     <string name="title">nama item</string>
-    <string name="corn">Corn</string>
-    <string name="tomato">Tomato</string>
-    <string name="potato">Potato</string>
-    <string name="plant_disease">%1$s Disease</string>
-    <string name="choose_plants">Choose plants</string>
-    <string name="message_wait">Wait a second … \neaseplantz is processing your data</string>
-    <string name="recommendation">Treatment recommendation</string>
-    <string name="detection_result">Detection result:</string>
+    <string name="choose_plants">Pilih tumbuhan</string>
+    <string name="message_wait">Tunggu sebentar … \neaseplantz sedang memproses data Anda</string>
+    <string name="recommendation">Rekomendasi perawatan</string>
+    <string name="detection_result">Hasil deteksi:</string>
+    <string name="plant_disease">Penyakit %1$s</string>
+    <string name="corn">Jagung</string>
+    <string name="tomato">Tomat</string>
+    <string name="potato">Kentang</string>
 </resources>
