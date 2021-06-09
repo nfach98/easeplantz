@@ -166,7 +166,7 @@ object Data {
         ))
 
         results.add(ResultEntity(
-            id = 16,
+            id = 17,
             disease = "Corn Northern Leaf Blight",
             description = "Memilih varietas hibrida yang tahan terhadap penyakit \n" +
                     "Pastikan tanaman memiliki nutrisi yang cukup. Jangan terlalu banyak memasok nitrogen, tetapi pastikan fosfor dan kalium berada pada tingkat yang optimal.\n" +
