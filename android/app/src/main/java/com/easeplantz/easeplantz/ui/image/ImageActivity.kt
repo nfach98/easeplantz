@@ -3,9 +3,11 @@ package com.easeplantz.easeplantz.ui.image
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -36,6 +38,12 @@ class ImageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityImageBinding.inflate(layoutInflater)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val background = ResourcesCompat.getDrawable(resources, R.drawable.bg_gradient_green_blue, null)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ResourcesCompat.getColor(resources, android.R.color.transparent, null)
+            window.setBackgroundDrawable(background)
+        }
         setContentView(binding.root)
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()

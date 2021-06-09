@@ -2,9 +2,13 @@ package com.easeplantz.easeplantz.ui.prediction
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.os.Build
 import android.os.Bundle
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
+import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.core.data.Resource
 import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
@@ -28,6 +32,12 @@ class PredictionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPredictionBinding.inflate(layoutInflater)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val background = ResourcesCompat.getDrawable(resources, R.drawable.bg_gradient_green_blue, null)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ResourcesCompat.getColor(resources, android.R.color.transparent, null)
+            window.setBackgroundDrawable(background)
+        }
         setContentView(binding.root)
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()

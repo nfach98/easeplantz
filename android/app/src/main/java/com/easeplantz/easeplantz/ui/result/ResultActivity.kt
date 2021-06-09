@@ -1,10 +1,14 @@
 package com.easeplantz.easeplantz.ui.result
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
+import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.core.data.Resource
 import com.easeplantz.easeplantz.core.domain.model.Prediction
 import com.easeplantz.easeplantz.core.utils.Data
@@ -24,6 +28,12 @@ class ResultActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultBinding.inflate(layoutInflater)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val background = ResourcesCompat.getDrawable(resources, R.drawable.bg_gradient_green_blue, null)
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+            window.statusBarColor = ResourcesCompat.getColor(resources, android.R.color.transparent, null)
+            window.setBackgroundDrawable(background)
+        }
         setContentView(binding.root)
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()
