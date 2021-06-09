@@ -62,41 +62,51 @@ class PredictionActivity : AppCompatActivity() {
             file = File(uri.path)
         }
 
-        binding.home.setOnClickListener { finish() }
+        with(binding){
+            val idString = when(model){
+                "corn" -> R.string.corn
+                "tomato" -> R.string.tomato
+                "potato" -> R.string.potato
+                else -> R.string.corn
+            }
+            tvPlant.text = String.format(resources.getString(R.string.plant_disease), resources.getString(idString))
 
-        binding.btnDetect.setOnClickListener {
-            val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
-            val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
+            home.setOnClickListener { finish() }
 
-            binding.loading.start()
-            binding.layout.transitionToEnd()
+            btnDetect.setOnClickListener {
+                val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
 
-            viewModel.getPrediction(model, part, true).observe(this, { prediction ->
-                if(prediction != null){
-                    when(prediction){
+                loading.start()
+                layout.transitionToEnd()
+
+                viewModel.getPrediction(model, part, true).observe(this@PredictionActivity, { prediction ->
+                    if(prediction != null){
+                        when(prediction){
 //                        is Resource.Loading -> {
-//                            binding.loading.start()
-//                            binding.layout.transitionToEnd()
+//                            loading.start()
+//                            layout.transitionToEnd()
 //                        }
-                        is Resource.Success -> {
-                            val intent = Intent(this@PredictionActivity, ResultActivity::class.java)
-                            intent.putExtra(MainActivity.EXTRA_MODEL, model)
-                            intent.putExtra(ResultActivity.EXTRA_PREDICTION, prediction.data)
-                            startActivity(intent)
-                            finish()
-                        }
-                        else -> {
-                            binding.loading.stop()
-                            binding.layout.transitionToStart()
-                            Toast.makeText(
-                                this@PredictionActivity,
-                                "Failed request. Please try again",
-                                Toast.LENGTH_SHORT
-                            ).show()
+                            is Resource.Success -> {
+                                val intent = Intent(this@PredictionActivity, ResultActivity::class.java)
+                                intent.putExtra(MainActivity.EXTRA_MODEL, model)
+                                intent.putExtra(ResultActivity.EXTRA_PREDICTION, prediction.data)
+                                startActivity(intent)
+                                finish()
+                            }
+                            else -> {
+                                loading.stop()
+                                layout.transitionToStart()
+                                Toast.makeText(
+                                    this@PredictionActivity,
+                                    "Failed request. Please try again",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
                         }
                     }
-                }
-            })
+                })
+            }
         }
     }
 }
