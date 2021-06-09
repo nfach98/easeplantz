@@ -1,5 +1,6 @@
 package com.easeplantz.easeplantz.ui.image
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,6 +11,8 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
@@ -85,23 +88,31 @@ class ImageActivity : AppCompatActivity() {
             }
 
             btnCamera.setOnClickListener {
-                camera.takePicture()
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
+                        val permissions = arrayOf(Manifest.permission.CAMERA)
+                        requestPermissions(permissions, PERMISSION_CODE)
+                    }
+                    else {
+                        camera.takePicture()
+                    }
+                }
+                else {
+                    camera.takePicture()
+                }
             }
 
             btnGallery.setOnClickListener {
                 if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
-                        //permission denied
-                        val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                    if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED) {
+                        val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
                         requestPermissions(permissions, PERMISSION_CODE)
                     }
                     else {
-                        //permission already granted
                         pickImageFromGallery()
                     }
                 }
                 else {
-                    //system OS is < Marshmallow
                     pickImageFromGallery()
                 }
             }

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import com.easeplantz.easeplantz.R
 import com.easeplantz.easeplantz.core.data.Resource
+import com.easeplantz.easeplantz.core.utils.ImageHelper
 import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.result.ResultActivity
@@ -58,8 +59,8 @@ class PredictionActivity : AppCompatActivity() {
 
         if(uri != null){
             Picasso.get().load(uri).fit().centerCrop().into(binding.ivImage)
-
-            file = File(uri.path)
+            val uriPath = ImageHelper.getPathFromURI(this, uri)
+            file = File(uriPath)
         }
 
         with(binding){
