@@ -119,7 +119,6 @@ class ImageActivity : AppCompatActivity() {
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.data
-            Log.d("format", ImageHelper.getPathFromURI(this@ImageActivity, takenImage).toString())
             if(ImageHelper.getPathFromURI(this@ImageActivity, takenImage)?.endsWith(".jpg") == true){
                 val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
                 intent.data = takenImage
