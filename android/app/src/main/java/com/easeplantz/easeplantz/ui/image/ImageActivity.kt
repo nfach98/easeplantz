@@ -65,6 +65,7 @@ class ImageActivity : AppCompatActivity() {
 
                     PredictionActivity.pictureResult = result
                     val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
+                    intent.putExtra(MainActivity.EXTRA_MODEL, model)
                     startActivity(intent)
 
                     btnCamera.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_camera_24, null))
