@@ -73,6 +73,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/btn_camera"
+        app:layout_constraintTop_toTopOf="@id/btn_camera"
+        app:layout_constraintEnd_toEndOf="@id/btn_camera"
+        app:layout_constraintBottom_toBottomOf="@id/btn_camera"/>
+
     <ImageView
         android:id="@+id/btn_flash"
         android:layout_width="0dp"

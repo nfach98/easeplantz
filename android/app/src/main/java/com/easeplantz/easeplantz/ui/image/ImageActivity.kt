@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +20,6 @@ import com.easeplantz.easeplantz.ui.prediction.PredictionActivity
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
 import com.otaliastudios.cameraview.controls.Flash
-import com.otaliastudios.cameraview.controls.Mode
-import com.otaliastudios.cameraview.gesture.Gesture
-import com.otaliastudios.cameraview.gesture.GestureAction
 
 
 class ImageActivity : AppCompatActivity() {
@@ -97,8 +95,9 @@ class ImageActivity : AppCompatActivity() {
                     camera.takePicture()
                 }*/
                 if (camera.isTakingPicture) return@setOnClickListener
-//                captureTime = System.currentTimeMillis()
-//                message("Capturing picture...", false)
+                btnCamera.setImageDrawable(null)
+                btnCamera.isEnabled = false
+                loading.visibility = View.VISIBLE
                 camera.takePicture()
             }
 
