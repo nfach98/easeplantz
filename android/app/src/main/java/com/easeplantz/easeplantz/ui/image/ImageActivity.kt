@@ -10,16 +10,16 @@ import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.easeplantz.easeplantz.R
+import com.easeplantz.easeplantz.core.utils.ImageHelper
 import com.easeplantz.easeplantz.databinding.ActivityImageBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.prediction.PredictionActivity
 import com.otaliastudios.cameraview.CameraListener
 import com.otaliastudios.cameraview.PictureResult
 import com.otaliastudios.cameraview.controls.Flash
+import com.otaliastudios.cameraview.controls.Mode
 import com.otaliastudios.cameraview.gesture.Gesture
 import com.otaliastudios.cameraview.gesture.GestureAction
 
@@ -59,25 +59,19 @@ class ImageActivity : AppCompatActivity() {
             tvPlant.text = String.format(resources.getString(R.string.plant_disease), resources.getString(idString))
 
             camera.setLifecycleOwner(this@ImageActivity)
-            camera.mapGesture(Gesture.PINCH, GestureAction.ZOOM)
-            camera.mapGesture(Gesture.TAP, GestureAction.AUTO_FOCUS)
+
             camera.addCameraListener(object : CameraListener() {
                 override fun onPictureTaken(result: PictureResult) {
                     super.onPictureTaken(result)
                     Log.d("camerane", "iso")
+
+                    PredictionActivity.pictureResult = result
                     val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
+                    startActivity(intent)
+                    /*val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
                     intent.putExtra("image", result.data)
                     intent.putExtra(MainActivity.EXTRA_MODEL, model)
-                    startActivity(intent)
-                    /*try{
-                        val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
-                        intent.putExtra("image", result.data)
-                        intent.putExtra(MainActivity.EXTRA_MODEL, model)
-                        startActivity(intent)
-                    }
-                    catch (e:Throwable){
-                        e.printStackTrace()
-                    }*/
+                    startActivity(intent)*/
                 }
             })
 
@@ -90,7 +84,7 @@ class ImageActivity : AppCompatActivity() {
             }
 
             btnCamera.setOnClickListener {
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                     if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
                         val permissions = arrayOf(Manifest.permission.CAMERA)
                         requestPermissions(permissions, PERMISSION_CAMERA)
@@ -101,7 +95,11 @@ class ImageActivity : AppCompatActivity() {
                 }
                 else{
                     camera.takePicture()
-                }
+                }*/
+                if (camera.isTakingPicture) return@setOnClickListener
+//                captureTime = System.currentTimeMillis()
+//                message("Capturing picture...", false)
+                camera.takePicture()
             }
 
             btnGallery.setOnClickListener {
@@ -123,7 +121,7 @@ class ImageActivity : AppCompatActivity() {
 
     private fun pickImageFromGallery() {
         val galleryIntent = Intent()
-        galleryIntent.type ="image/*"
+        galleryIntent.type ="image/jpg"
         galleryIntent.action = Intent.ACTION_PICK
         startActivityForResult(galleryIntent, IMAGE_PICK_CODE)
     }
@@ -133,10 +131,16 @@ class ImageActivity : AppCompatActivity() {
 
         if (requestCode == IMAGE_PICK_CODE && resultCode == Activity.RESULT_OK) {
             val takenImage = data?.data
-            val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
-            intent.data = takenImage
-            intent.putExtra(MainActivity.EXTRA_MODEL, model)
-            startActivity(intent)
+            Log.d("format", ImageHelper.getPathFromURI(this@ImageActivity, takenImage).toString())
+            if(ImageHelper.getPathFromURI(this@ImageActivity, takenImage)?.endsWith(".jpg") == true){
+                val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
+                intent.data = takenImage
+                intent.putExtra(MainActivity.EXTRA_MODEL, model)
+                startActivity(intent)
+            }
+            else {
+                Toast.makeText(this, "Format gambar tidak sesuai", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

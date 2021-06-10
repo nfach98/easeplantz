@@ -22,7 +22,7 @@
             android:theme="@style/Theme.Easeplantz.NoActionBar" />
         <activity
             android:name=".ui.image.ImageActivity"
-            android:theme="@style/Theme.Easeplantz.NoActionBar" />
+            android:theme="@style/Theme.Easeplantz.NoActionBar"/>
         <activity
             android:name=".ui.main.MainActivity"
             android:theme="@style/Theme.Easeplantz.NoActionBar">

@@ -2,8 +2,11 @@ package com.easeplantz.easeplantz.ui.prediction
 
 import android.content.Intent
 import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +17,7 @@ import com.easeplantz.easeplantz.core.utils.ImageHelper
 import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.result.ResultActivity
+import com.otaliastudios.cameraview.PictureResult
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -24,6 +28,10 @@ import java.io.FileOutputStream
 
 
 class PredictionActivity : AppCompatActivity() {
+
+    companion object {
+        var pictureResult: PictureResult? = null
+    }
 
     private val viewModel: PredictionViewModel by viewModel()
     private lateinit var binding: ActivityPredictionBinding
@@ -40,6 +48,10 @@ class PredictionActivity : AppCompatActivity() {
             window.setBackgroundDrawable(background)
         }
         setContentView(binding.root)
+        val result = pictureResult ?: run {
+            finish()
+            return
+        }
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()
         val image = intent.getByteArrayExtra("image")
@@ -75,7 +87,7 @@ class PredictionActivity : AppCompatActivity() {
             home.setOnClickListener { finish() }
 
             btnDetect.setOnClickListener {
-                val body = RequestBody.create("image/*".toMediaTypeOrNull(), file)
+                val body = RequestBody.create("image/jpg".toMediaTypeOrNull(), file)
                 val part = MultipartBody.Part.createFormData("predict-img", file.name, body)
 
                 loading.start()
@@ -108,6 +120,30 @@ class PredictionActivity : AppCompatActivity() {
                     }
                 })
             }
+
+            try {
+                result.toBitmap(1000, 1000) { bitmap -> ivImage.setImageBitmap(bitmap) }
+            } catch (e: UnsupportedOperationException) {
+                ivImage.setImageDrawable(ColorDrawable(Color.GREEN))
+                Toast.makeText(this@PredictionActivity, "Can't preview this format: " + result.format, Toast.LENGTH_LONG).show()
+            }
+            if (result.isSnapshot) {
+                val options = BitmapFactory.Options()
+                options.inJustDecodeBounds = true
+                BitmapFactory.decodeByteArray(result.data, 0, result.data.size, options)
+                if (result.rotation % 180 != 0) {
+                    Log.e("PicturePreview", "The picture full size is ${result.size.height}x${result.size.width}")
+                } else {
+                    Log.e("PicturePreview", "The picture full size is ${result.size.width}x${result.size.height}")
+                }
+            }
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (!isChangingConfigurations) {
+            pictureResult = null
         }
     }
 }
