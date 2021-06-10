@@ -1,12 +1,11 @@
 package com.easeplantz.easeplantz.ui.prediction
 
+import android.animation.ValueAnimator
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -17,14 +16,15 @@ import com.easeplantz.easeplantz.core.utils.ImageHelper
 import com.easeplantz.easeplantz.databinding.ActivityPredictionBinding
 import com.easeplantz.easeplantz.ui.main.MainActivity
 import com.easeplantz.easeplantz.ui.result.ResultActivity
+import com.otaliastudios.cameraview.CameraUtils
 import com.otaliastudios.cameraview.PictureResult
+import com.otaliastudios.cameraview.controls.PictureFormat
 import com.squareup.picasso.Picasso
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.koin.android.viewmodel.ext.android.viewModel
 import java.io.File
-import java.io.FileOutputStream
 
 
 class PredictionActivity : AppCompatActivity() {
@@ -54,20 +54,8 @@ class PredictionActivity : AppCompatActivity() {
         }
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()
-        val image = intent.getByteArrayExtra("image")
+//        val image = intent.getByteArrayExtra("image")
         val uri = intent.data
-
-        if(image != null) {
-            val bmp = BitmapFactory.decodeByteArray(image, 0, image.size)
-            binding.ivImage.setImageBitmap(bmp)
-
-            file = File(cacheDir, "$model.jpg")
-            file.createNewFile()
-            val fos = FileOutputStream(file)
-            fos.write(image)
-            fos.flush()
-            fos.close()
-        }
 
         if(uri != null){
             Picasso.get().load(uri).fit().centerCrop().into(binding.ivImage)
@@ -76,6 +64,17 @@ class PredictionActivity : AppCompatActivity() {
         }
 
         with(binding){
+            val loading = ValueAnimator.ofFloat(1f, 1f)
+            loading.duration = 300
+            loading.repeatCount = ValueAnimator.INFINITE
+            loading.repeatMode = ValueAnimator.REVERSE
+            loading.addUpdateListener { animation ->
+                val scale = animation.animatedValue as Float
+                leaves.scaleX = scale
+                leaves.scaleY = scale
+                leaves.rotation = leaves.rotation + 2
+            }
+
             val idString = when(model){
                 "corn" -> R.string.corn
                 "tomato" -> R.string.tomato
@@ -108,7 +107,7 @@ class PredictionActivity : AppCompatActivity() {
                                 finish()
                             }
                             else -> {
-                                loading.stop()
+                                loading.end()
                                 layout.transitionToStart()
                                 Toast.makeText(
                                     this@PredictionActivity,
@@ -123,19 +122,26 @@ class PredictionActivity : AppCompatActivity() {
 
             try {
                 result.toBitmap(1000, 1000) { bitmap -> ivImage.setImageBitmap(bitmap) }
+
+                val extension = when (pictureResult!!.format) {
+                    PictureFormat.JPEG -> "jpg"
+                    PictureFormat.DNG -> "dng"
+                    else -> throw RuntimeException("Unknown format.")
+                }
+                file = File(filesDir, "picture.$extension")
+                pictureResult?.data?.let {
+                    CameraUtils.writeToFile(it, file) { file ->
+                        if (file == null) {
+                            Toast.makeText(
+                                this@PredictionActivity,
+                                "Error while writing file.",
+                                Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             } catch (e: UnsupportedOperationException) {
                 ivImage.setImageDrawable(ColorDrawable(Color.GREEN))
                 Toast.makeText(this@PredictionActivity, "Can't preview this format: " + result.format, Toast.LENGTH_LONG).show()
-            }
-            if (result.isSnapshot) {
-                val options = BitmapFactory.Options()
-                options.inJustDecodeBounds = true
-                BitmapFactory.decodeByteArray(result.data, 0, result.data.size, options)
-                if (result.rotation % 180 != 0) {
-                    Log.e("PicturePreview", "The picture full size is ${result.size.height}x${result.size.width}")
-                } else {
-                    Log.e("PicturePreview", "The picture full size is ${result.size.width}x${result.size.height}")
-                }
             }
         }
     }
