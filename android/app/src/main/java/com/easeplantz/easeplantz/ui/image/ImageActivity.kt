@@ -66,10 +66,10 @@ class ImageActivity : AppCompatActivity() {
                     PredictionActivity.pictureResult = result
                     val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
                     startActivity(intent)
-                    /*val intent = Intent(this@ImageActivity, PredictionActivity::class.java)
-                    intent.putExtra("image", result.data)
-                    intent.putExtra(MainActivity.EXTRA_MODEL, model)
-                    startActivity(intent)*/
+
+                    btnCamera.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.ic_baseline_camera_24, null))
+                    btnCamera.isEnabled = true
+                    loading.visibility = View.GONE
                 }
             })
 
@@ -82,18 +82,6 @@ class ImageActivity : AppCompatActivity() {
             }
 
             btnCamera.setOnClickListener {
-                /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
-                        val permissions = arrayOf(Manifest.permission.CAMERA)
-                        requestPermissions(permissions, PERMISSION_CAMERA)
-                    }
-                    else {
-                        camera.takePicture()
-                    }
-                }
-                else{
-                    camera.takePicture()
-                }*/
                 if (camera.isTakingPicture) return@setOnClickListener
                 btnCamera.setImageDrawable(null)
                 btnCamera.isEnabled = false
