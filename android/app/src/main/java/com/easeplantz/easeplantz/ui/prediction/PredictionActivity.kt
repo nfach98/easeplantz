@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,7 +25,9 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import org.koin.android.viewmodel.ext.android.viewModel
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.util.zip.Deflater
 
 
 class PredictionActivity : AppCompatActivity() {
@@ -48,13 +51,8 @@ class PredictionActivity : AppCompatActivity() {
             window.setBackgroundDrawable(background)
         }
         setContentView(binding.root)
-        val result = pictureResult ?: run {
-            finish()
-            return
-        }
 
         model = intent.getStringExtra(MainActivity.EXTRA_MODEL).toString()
-//        val image = intent.getByteArrayExtra("image")
         val uri = intent.data
 
         if(uri != null){
@@ -120,28 +118,33 @@ class PredictionActivity : AppCompatActivity() {
                 })
             }
 
-            try {
-                result.toBitmap(1000, 1000) { bitmap -> ivImage.setImageBitmap(bitmap) }
+            if(pictureResult != null){
+                try {
+                    pictureResult?.toBitmap(1000, 1000) { bitmap -> ivImage.setImageBitmap(bitmap) }
 
-                val extension = when (pictureResult!!.format) {
-                    PictureFormat.JPEG -> "jpg"
-                    PictureFormat.DNG -> "dng"
-                    else -> throw RuntimeException("Unknown format.")
-                }
-                file = File(filesDir, "picture.$extension")
-                pictureResult?.data?.let {
-                    CameraUtils.writeToFile(it, file) { file ->
-                        if (file == null) {
-                            Toast.makeText(
-                                this@PredictionActivity,
-                                "Error while writing file.",
-                                Toast.LENGTH_SHORT).show()
+                    val extension = when (pictureResult?.format) {
+                        PictureFormat.JPEG -> "jpg"
+                        PictureFormat.DNG -> "dng"
+                        else -> throw RuntimeException("Unknown format.")
+                    }
+                    file = File(filesDir, "picture.$extension")
+                    pictureResult?.data?.let {
+
+                        CameraUtils.writeToFile(it, file) { file ->
+                            if (file == null) {
+                                Toast.makeText(
+                                    this@PredictionActivity,
+                                    "Error while writing file.",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+
+                            Log.d("ukuran", (file?.length().toString().toDouble()/1024).toString())
                         }
                     }
+                } catch (e: UnsupportedOperationException) {
+                    ivImage.setImageDrawable(ColorDrawable(Color.GREEN))
+                    Toast.makeText(this@PredictionActivity, "Can't preview this format: " + pictureResult?.format, Toast.LENGTH_LONG).show()
                 }
-            } catch (e: UnsupportedOperationException) {
-                ivImage.setImageDrawable(ColorDrawable(Color.GREEN))
-                Toast.makeText(this@PredictionActivity, "Can't preview this format: " + result.format, Toast.LENGTH_LONG).show()
             }
         }
     }
